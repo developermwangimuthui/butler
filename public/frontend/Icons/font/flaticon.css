@@ -1,0 +1,113 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("./flaticon.ttf?9d15f61c6346eab6860c7946ee0cf14e") format("truetype"),
+url("./flaticon.woff?9d15f61c6346eab6860c7946ee0cf14e") format("woff"),
+url("./flaticon.woff2?9d15f61c6346eab6860c7946ee0cf14e") format("woff2"),
+url("./flaticon.eot?9d15f61c6346eab6860c7946ee0cf14e#iefix") format("embedded-opentype"),
+url("./flaticon.svg?9d15f61c6346eab6860c7946ee0cf14e#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-manager:before {
+    content: "\f101";
+}
+.flaticon-management:before {
+    content: "\f102";
+}
+.flaticon-team:before {
+    content: "\f103";
+}
+.flaticon-project-management:before {
+    content: "\f104";
+}
+.flaticon-administration:before {
+    content: "\f105";
+}
+.flaticon-research:before {
+    content: "\f106";
+}
+.flaticon-management-2:before {
+    content: "\f107";
+}
+.flaticon-factory:before {
+    content: "\f108";
+}
+.flaticon-transportation:before {
+    content: "\f109";
+}
+.flaticon-warehouse:before {
+    content: "\f10a";
+}
+.flaticon-box:before {
+    content: "\f10b";
+}
+.flaticon-distributed:before {
+    content: "\f10c";
+}
+.flaticon-supplier-1:before {
+    content: "\f10d";
+}
+.flaticon-location:before {
+    content: "\f10e";
+}
+.flaticon-distribution-1:before {
+    content: "\f10f";
+}
+.flaticon-distribution-2:before {
+    content: "\f110";
+}
+.flaticon-distribution-3:before {
+    content: "\f111";
+}
+.flaticon-solution:before {
+    content: "\f112";
+}
+.flaticon-solution-1:before {
+    content: "\f113";
+}
+.flaticon-key:before {
+    content: "\f114";
+}
+.flaticon-solution-2:before {
+    content: "\f115";
+}
+.flaticon-solution-4:before {
+    content: "\f116";
+}
+.flaticon-idea:before {
+    content: "\f117";
+}
+.flaticon-solution-5:before {
+    content: "\f118";
+}
+.flaticon-integration:before {
+    content: "\f119";
+}
+.flaticon-cargo-ship:before {
+    content: "\f11a";
+}
+.flaticon-cargo-ship-1:before {
+    content: "\f11b";
+}
+.flaticon-cargo-ship-2:before {
+    content: "\f11c";
+}
+.flaticon-shipment-1:before {
+    content: "\f11d";
+}
+.flaticon-cargo-ship-3:before {
+    content: "\f11e";
+}
+.flaticon-ship:before {
+    content: "\f11f";
+}

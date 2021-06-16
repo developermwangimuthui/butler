@@ -1,0 +1,149 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?9d15f61c6346eab6860c7946ee0cf14e") format("truetype"),
+url("./flaticon.woff?9d15f61c6346eab6860c7946ee0cf14e") format("woff"),
+url("./flaticon.woff2?9d15f61c6346eab6860c7946ee0cf14e") format("woff2"),
+url("./flaticon.eot?9d15f61c6346eab6860c7946ee0cf14e#iefix") format("embedded-opentype"),
+url("./flaticon.svg?9d15f61c6346eab6860c7946ee0cf14e#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "manager": "\f101",
+    "management": "\f102",
+    "team": "\f103",
+    "project-management": "\f104",
+    "administration": "\f105",
+    "research": "\f106",
+    "management-2": "\f107",
+    "factory": "\f108",
+    "transportation": "\f109",
+    "warehouse": "\f10a",
+    "box": "\f10b",
+    "distributed": "\f10c",
+    "supplier-1": "\f10d",
+    "location": "\f10e",
+    "distribution-1": "\f10f",
+    "distribution-2": "\f110",
+    "distribution-3": "\f111",
+    "solution": "\f112",
+    "solution-1": "\f113",
+    "key": "\f114",
+    "solution-2": "\f115",
+    "solution-4": "\f116",
+    "idea": "\f117",
+    "solution-5": "\f118",
+    "integration": "\f119",
+    "cargo-ship": "\f11a",
+    "cargo-ship-1": "\f11b",
+    "cargo-ship-2": "\f11c",
+    "shipment-1": "\f11d",
+    "cargo-ship-3": "\f11e",
+    "ship": "\f11f",
+);
+
+.flaticon-manager:before {
+    content: map-get($flaticon-map, "manager");
+}
+.flaticon-management:before {
+    content: map-get($flaticon-map, "management");
+}
+.flaticon-team:before {
+    content: map-get($flaticon-map, "team");
+}
+.flaticon-project-management:before {
+    content: map-get($flaticon-map, "project-management");
+}
+.flaticon-administration:before {
+    content: map-get($flaticon-map, "administration");
+}
+.flaticon-research:before {
+    content: map-get($flaticon-map, "research");
+}
+.flaticon-management-2:before {
+    content: map-get($flaticon-map, "management-2");
+}
+.flaticon-factory:before {
+    content: map-get($flaticon-map, "factory");
+}
+.flaticon-transportation:before {
+    content: map-get($flaticon-map, "transportation");
+}
+.flaticon-warehouse:before {
+    content: map-get($flaticon-map, "warehouse");
+}
+.flaticon-box:before {
+    content: map-get($flaticon-map, "box");
+}
+.flaticon-distributed:before {
+    content: map-get($flaticon-map, "distributed");
+}
+.flaticon-supplier-1:before {
+    content: map-get($flaticon-map, "supplier-1");
+}
+.flaticon-location:before {
+    content: map-get($flaticon-map, "location");
+}
+.flaticon-distribution-1:before {
+    content: map-get($flaticon-map, "distribution-1");
+}
+.flaticon-distribution-2:before {
+    content: map-get($flaticon-map, "distribution-2");
+}
+.flaticon-distribution-3:before {
+    content: map-get($flaticon-map, "distribution-3");
+}
+.flaticon-solution:before {
+    content: map-get($flaticon-map, "solution");
+}
+.flaticon-solution-1:before {
+    content: map-get($flaticon-map, "solution-1");
+}
+.flaticon-key:before {
+    content: map-get($flaticon-map, "key");
+}
+.flaticon-solution-2:before {
+    content: map-get($flaticon-map, "solution-2");
+}
+.flaticon-solution-4:before {
+    content: map-get($flaticon-map, "solution-4");
+}
+.flaticon-idea:before {
+    content: map-get($flaticon-map, "idea");
+}
+.flaticon-solution-5:before {
+    content: map-get($flaticon-map, "solution-5");
+}
+.flaticon-integration:before {
+    content: map-get($flaticon-map, "integration");
+}
+.flaticon-cargo-ship:before {
+    content: map-get($flaticon-map, "cargo-ship");
+}
+.flaticon-cargo-ship-1:before {
+    content: map-get($flaticon-map, "cargo-ship-1");
+}
+.flaticon-cargo-ship-2:before {
+    content: map-get($flaticon-map, "cargo-ship-2");
+}
+.flaticon-shipment-1:before {
+    content: map-get($flaticon-map, "shipment-1");
+}
+.flaticon-cargo-ship-3:before {
+    content: map-get($flaticon-map, "cargo-ship-3");
+}
+.flaticon-ship:before {
+    content: map-get($flaticon-map, "ship");
+}
