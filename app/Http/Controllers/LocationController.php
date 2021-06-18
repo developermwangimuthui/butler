@@ -14,7 +14,8 @@ class LocationController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('backend.locations.index');
     }
 
     /**
@@ -35,7 +36,25 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+
+        ]);
+
+        $location = new Location();
+        $location->name = $request->input('name');
+        $location->description = $request->input('description');
+        if ($location->save()) {
+            return redirect()->route('loaction.index')
+            ->with('success','Location added successfully!');
+        } else {
+
+            return redirect()->route('loaction.index')
+            ->with('failure','Location not added!');
+
+        }
+
     }
 
     /**

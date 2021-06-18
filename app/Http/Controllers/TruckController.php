@@ -14,7 +14,8 @@ class TruckController extends Controller
      */
     public function index()
     {
-        //
+        $trucks = Truck::all();
+        return view('backend.trucks.index',compact('trucks'));
     }
 
     /**
@@ -35,7 +36,23 @@ class TruckController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $truck = new Truck();
+        $truck->owners_name = $request->input('owners_name');
+        $truck->owners_phone = $request->input('owners_phone');
+        $truck->registration = $request->input('registration');
+        $truck->model = $request->input('model');
+        $truck->load_capacity = $request->input('load_capacity');
+        $truck->truck_type = $request->input('truck_type');
+        $truck->cargo_bed_dimensions = $request->input('cargo_bed_dimensions');
+        if ($truck->save()) {
+            return redirect()->route('truck.index')
+                ->with('success', 'Truck added successfully!');
+        } else {
+
+            return redirect()->route('truck.index')
+                ->with('failure', 'Truck not added!');
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.customers.index');
     }
 
     /**
@@ -35,7 +35,28 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'town' => 'required',
+            'location_description' => 'required',
+
+        ]);
+
+        $customer = new Customer();
+        $customer->name = $request->input('name');
+        $customer->phone = $request->input('phone');
+        $customer->town = $request->input('town');
+        $customer->location_description = $request->input('location_description');
+        if ($customer->save()) {
+            return redirect()->route('customer.index')
+            ->with('success','Customer added successfully!');
+        } else {
+
+            return redirect()->route('customer.index')
+            ->with('failure','Customer not added!');
+
+        }
     }
 
     /**

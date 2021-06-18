@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\TruckController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +19,6 @@ use App\Http\Controllers\FrontEndController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 //...............................FrontEnd Routes.....................//
@@ -35,3 +36,41 @@ Route::get('/transport', [FrontEndController::class, 'transport'])->name('transp
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//..............................Trucks......................................//
+
+Route::get('/truck/index', [TruckController::class, 'index'])->name('truck.index');
+Route::post('/truck/store', [TruckController::class, 'store'])->name('truck.store');
+Route::get('/truck/edit/{id}', [TruckController::class, 'edit'])->name('truck.edit');
+Route::get('/truck/show/{id}', [TruckController::class, 'show'])->name('truck.show');
+Route::put('/truck/update', [TruckController::class, 'update'])->name('truck.update');
+Route::get('/truck/delete/{id}', [TruckController::class, 'destroy'])->name('truck.delete');
+
+//..............................Customers......................................//
+
+Route::get('/customer/index', [CustomerController::class, 'index'])->name('customer.index');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
+Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::get('/customer/show/{id}', [CustomerController::class, 'show'])->name('customer.show');
+Route::put('/customer/update', [CustomerController::class, 'update'])->name('customer.update');
+Route::get('/customer/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.delete');
+
+//..............................Locations......................................//
+
+Route::get('/location/index', [LocationController::class, 'index'])->name('location.index');
+Route::post('/location/store', [LocationController::class, 'store'])->name('location.store');
+Route::get('/location/edit/{id}', [LocationController::class, 'edit'])->name('location.edit');
+Route::get('/location/show/{id}', [LocationController::class, 'show'])->name('location.show');
+Route::put('/location/update', [LocationController::class, 'update'])->name('location.update');
+Route::get('/location/delete/{id}', [LocationController::class, 'destroy'])->name('location.delete');
+
+//..............................Shipment......................................//
+
+Route::get('/shipment/index', [ShipmentController::class, 'index'])->name('shipment.index');
+Route::post('/shipment/store', [ShipmentController::class, 'store'])->name('shipment.store');
+Route::get('/shipment/edit/{id}', [ShipmentController::class, 'edit'])->name('shipment.edit');
+Route::get('/shipment/show/{id}', [ShipmentController::class, 'show'])->name('shipment.show');
+Route::put('/shipment/update', [ShipmentController::class, 'update'])->name('shipment.update');
+Route::get('/shipment/delete/{id}', [ShipmentController::class, 'destroy'])->name('shipment.delete');
+
+
