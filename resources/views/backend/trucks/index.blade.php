@@ -71,9 +71,9 @@
                                                 <td>{{$truck->owners_name}}</td>
                                                 <td>{{$truck->owners_phone}}</td>
                                                 <td>
-                                                    <span><a class="fa fa-trash" href="{{route('truck.delete',$truck->id)}}" title="delete"></a></span>
+                                                    <span><a class="ft-edit-1" href="{{route('truck.edit',$truck->id)}}" title="delete"></a></span>
                                                     &nbsp;&nbsp;
-                                                    {{-- <a href="{{route('store.connect',$store->id)}}" class="edit" style="color:#967ADC"><i class="fa fa-plug"></i></a> --}}
+                                                    <a href="{{route('truck.delete',$truck->id)}}" class="edit" style="color:#967ADC"><i class="ft-trash-2"></i></a>
                                                 </td>
                                             </tr>
 

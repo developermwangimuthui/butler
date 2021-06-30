@@ -97,6 +97,6 @@ class TruckController extends Controller
      */
     public function destroy(Truck $truck)
     {
-        //
+        
     }
 }

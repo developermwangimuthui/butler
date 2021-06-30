@@ -77,7 +77,7 @@
     <ul class="dropdown">
       <li><a href="https://nmp.co.ke:2096/">Staff Mail</a></li>
       <li><a href="#">Customer Login</a></li>
-      <li><a href="#">My Workspace</a></li>
+      <li><a href="{{route('login')}}">My Workspace</a></li>
 </ul>
 </nav>
           </div>
