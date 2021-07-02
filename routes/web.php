@@ -48,11 +48,13 @@ Route::get('/truck/delete/{id}', [TruckController::class, 'destroy'])->name('tru
 
 //..............................Customers......................................//
 
+Route::get('/customer/test', [CustomerController::class, 'test'])->name('customer.test');
+
 Route::get('/customer/index', [CustomerController::class, 'index'])->name('customer.index');
 Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
 Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
 Route::get('/customer/show/{id}', [CustomerController::class, 'show'])->name('customer.show');
-Route::put('/customer/update', [CustomerController::class, 'update'])->name('customer.update');
+Route::put('/customer/update{id}', [CustomerController::class, 'update'])->name('customer.update');
 Route::get('/customer/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.delete');
 
 //..............................Locations......................................//

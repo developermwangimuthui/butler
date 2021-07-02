@@ -18,6 +18,8 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="/backend/app-assets/vendors/css/material-vendors.min.css">
 
+    <link rel="stylesheet" type="text/css" href="/backend/app-assets/vendors/css/forms/selects/select2.min.css">
+
     <link rel="stylesheet" type="text/css" href="/backend/app-assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- END: Vendor CSS-->
 
@@ -83,6 +85,8 @@
     <script src="/backend/app-assets/vendors/js/tables/vfs_fonts.js"></script>
     <script src="/backend/app-assets/vendors/js/tables/buttons.html5.min.js"></script>
     <script src="/backend/app-assets/vendors/js/tables/buttons.print.min.js"></script>
+
+    <script src="/backend/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -94,6 +98,8 @@
     <script src="/backend/app-assets/js/scripts/pages/material-app.js"></script>
     <script src="/backend/app-assets/js/scripts/pages/appointment.js"></script>
     <script src="/backend/app-assets/js/scripts/tables/datatables/datatable-advanced.js"></script>
+    
+    <script src="/backend/app-assets/js/scripts/forms/select/form-select2.js"></script>
 
     <!-- END: Page JS-->
 

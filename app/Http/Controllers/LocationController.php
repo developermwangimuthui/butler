@@ -14,8 +14,9 @@ class LocationController extends Controller
      */
     public function index()
     {
+        $locations= Location::all();
 
-        return view('backend.locations.index');
+        return view('backend.locations.index', compact('locations'));
     }
 
     /**
@@ -46,7 +47,7 @@ class LocationController extends Controller
         $location->name = $request->input('name');
         $location->description = $request->input('description');
         if ($location->save()) {
-            return redirect()->route('loaction.index')
+            return redirect()->route('location.index')
             ->with('success','Location added successfully!');
         } else {
 
@@ -97,8 +98,12 @@ class LocationController extends Controller
      * @param  \App\Models\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Location $location)
+    public function destroy(Location $location , $id)
     {
         //
+        $location->destroy($id);
+
+        return redirect()->route('location.index')
+        ->with('success','Location removed successfully!');
     }
 }

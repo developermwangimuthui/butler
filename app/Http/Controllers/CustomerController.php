@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -12,9 +15,17 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function test () {
+        $data = Customer::all();
+
+        return response()->json($data, 200);
+    }
+
     public function index()
     {
-        return view('backend.customers.index');
+        $customers = Customer::all();
+
+        return view('backend.customers.index', compact('customers'));
     }
 
     /**
@@ -37,25 +48,47 @@ class CustomerController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'email' => 'required',
             'phone' => 'required',
             'town' => 'required',
             'location_description' => 'required',
-
         ]);
 
-        $customer = new Customer();
-        $customer->name = $request->input('name');
-        $customer->phone = $request->input('phone');
-        $customer->town = $request->input('town');
-        $customer->location_description = $request->input('location_description');
-        if ($customer->save()) {
-            return redirect()->route('customer.index')
-            ->with('success','Customer added successfully!');
+        $password = Hash::make('password');
+
+        $email = $request->input('email');
+
+        if (DB::table('users')->where('email', $email)->doesntExist()) {
+
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $email,
+                'password' => $password
+            ]);
+
+            $userId = $user->id;
+
+            if ($userId) {
+
+                $customer = new Customer();
+                $customer->phone = $request->input('phone');
+                $customer->user_id = $userId;
+                $customer->town = $request->input('town');
+                $customer->location_description = $request->input('location_description');
+
+                if ($customer->save()) {
+                    return redirect()->route('customer.index')
+                        ->with('success', 'Customer added successfully!');
+                }
+            } else {
+
+                return redirect()->route('customer.index')
+                    ->with('failure', 'Customer not added!');
+            }
         } else {
 
             return redirect()->route('customer.index')
-            ->with('failure','Customer not added!');
-
+                ->with('failure', 'User Already Exists!');
         }
     }
 
@@ -68,6 +101,7 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         //
+
     }
 
     /**
@@ -76,9 +110,13 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Customer $customer, $id)
     {
         //
+        $data = $customer->where('id', $id)->get();
+        // dd($data);
+
+        return response()->json($data);
     }
 
     /**
@@ -99,8 +137,12 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Customer $customer, $id)
     {
         //
+        $customer->destroy($id);
+
+        return redirect()->route('customer.index')
+        ->with('success','customer removed successfully!');
     }
 }

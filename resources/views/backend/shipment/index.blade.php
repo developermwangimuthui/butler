@@ -20,7 +20,11 @@
                     </div>
                 </div>
                 <div class="content-header-right col-md-6 col-12">
+                    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                        <button class="btn btn-info round  box-shadow-2 px-2 mb-1" data-toggle="modal" data-backdrop="false"
+                            data-target="#shipment_info"><i class="ft-plus icon-left"></i> Add Shipment</button>
 
+                    </div>
                 </div>
             </div>
             <div class="content-body">
@@ -43,7 +47,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
 
-                                        <table class="table table-striped table-bordered file-export">
+                                        <table class="table table-striped table-bordered file-export dataex-res-immediately">
                                             <thead>
                                                 <tr>
                                                     <th>Customer Name</th>
@@ -89,9 +93,157 @@
                     </div>
                 </section>
                 <!-- File export table -->
+                
 
             </div>
         </div>
     </div>
+ <!-- Modal -->
+ <div class="modal fade text-left" id="shipment_info" data-backdrop="false" tabindex="-1" role="dialog"
+ aria-labelledby="myModalLabel11" aria-hidden="true">
+ <div class=" modal-lg modal-dialog" role="document">
+     <div class="modal-content">
+         <div class="modal-header bg-info white">
+             <h4 class="modal-title white" id="myModalLabel11">Add Shipment</h4>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+         <div class="modal-body">
+             <form class="form" method="POST" action="{{ route('shipment.store') }}">
+                 @csrf
+                 <div class="form-body">
+                    <div class="row">
+                        <div class="form-group  col-md-3">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control round" name="name">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="name">Email</label>
+                            <input type="email" id="email" class="form-control round" name="email">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput1">Phone</label>
+                            <input type="text" id="complaintinput1" class="form-control round" name="phone">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput2">Town</label>
+                            <input type="text" id="complaintinput2" class="form-control round" name="town">
+                        </div>
+   
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-3">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control round" name="name">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="name">Email</label>
+                            <input type="email" id="email" class="form-control round" name="email">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput1">Phone</label>
+                            <input type="text" id="complaintinput1" class="form-control round" name="phone">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput2">Town</label>
+                            <input type="text" id="complaintinput2" class="form-control round" name="town">
+                        </div>
+   
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-3">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control round" name="name">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="name">Email</label>
+                            <input type="email" id="email" class="form-control round" name="email">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput1">Phone</label>
+                            <input type="text" id="complaintinput1" class="form-control round" name="phone">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput2">Town</label>
+                            <input type="text" id="complaintinput2" class="form-control round" name="town">
+                        </div>
+   
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-3">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control round" name="name">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="name">Email</label>
+                            <input type="email" id="email" class="form-control round" name="email">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput1">Phone</label>
+                            <input type="text" id="complaintinput1" class="form-control round" name="phone">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput2">Town</label>
+                            <input type="text" id="complaintinput2" class="form-control round" name="town">
+                        </div>
+   
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-3">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control round" name="name">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="name">Email</label>
+                            <input type="email" id="email" class="form-control round" name="email">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput1">Phone</label>
+                            <input type="text" id="complaintinput1" class="form-control round" name="phone">
+                        </div>
+   
+                        <div class="form-group col-md-3">
+                            <label for="complaintinput2">Town</label>
+                            <input type="text" id="complaintinput2" class="form-control round" name="town">
+                        </div>
+   
+                        
+                    </div>
+                    
 
+
+                     <div class="form-actions">
+                         <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
+                             <i class="ft-x"></i> Cancel
+                         </button>
+                         <button type="submit" class="btn btn-primary">
+                             <i class="la la-check-square-o"></i> Save
+                         </button>
+                     </div>
+                 </div>
+             </form>
+         </div>
+
+     </div>
+ </div>
+</div>
 @endsection

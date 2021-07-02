@@ -45,9 +45,7 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
-                                        <p class="card-text">Exporting data from a table can often be a key part of a complex
-                                            application. The Buttons extension for DataTables provides three plug-ins that provide
-                                            overlapping functionality for data export.</p>
+
                                         <table class="table table-striped table-bordered file-export">
                                             <thead>
                                                 <tr>
@@ -57,16 +55,27 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Garrett Winters</td>
-                                                    <td>Accountant</td>
-                                                    <td>Tokyo</td>
-                                                </tr>
+                                                @foreach ($locations as $location)
+                                                    <tr>
+                                                        <td>{{ $location->name }}</td>
+                                                        <td> {{ $location->description }}</td>
+                                                        <td>
+                                                            <span><i class="ft-edit-1" data-toggle="modal"
+                                                                    data-target="#info"
+                                                                    data-id="{{ $location->id }}"
+                                                                    data-action="edit"
+                                                                    title="edit">
+                                                                </i>
+                                                            </span>
+                                                            &nbsp;&nbsp;
+                                                            <a href="{{ route('location.delete', $location->id) }}"
+                                                                class="edit" style="color:#967ADC"><i
+                                                                    class="ft-trash-2"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                @endforeach
+
                                             </tbody>
                                             <tfoot>
                                                 <tr>
@@ -96,27 +105,39 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Basic Modal</h4>
+                <h4 class="modal-title white" id="myModalLabel11">Add Location</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h5>Check First Paragraph</h5>
-                <p>Oat cake ice cream candy chocolate cake chocolate cake cotton candy dragée apple pie. Brownie carrot
-                    cake candy canes bonbon fruitcake topping halvah. Cake sweet roll cake cheesecake cookie chocolate cake
-                    liquorice. Apple pie sugar plum powder donut soufflé.</p>
-                <p>Sweet roll biscuit donut cake gingerbread. Chocolate cupcake chocolate bar ice cream. Danish candy
-                    cake.</p>
-                <hr>
-                <h5>Some More Text</h5>
-                <p>Cupcake sugar plum dessert tart powder chocolate fruitcake jelly. Tootsie roll bonbon toffee danish.
-                    Biscuit sweet cake gummies danish. Tootsie roll cotton candy tiramisu lollipop candy cookie biscuit pie.</p>
+                <form class="form" method="POST" action="{{ route('location.store') }}">
+                    @csrf
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control round" name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="complaintinput3">Location Description</label>
+                            <input type="text" id="complaintinput3" class="form-control round"
+                                name="description">
+                        </div>
+
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
+                                <i class="ft-x"></i> Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="la la-check-square-o"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline-info">Save changes</button>
-            </div>
+
         </div>
     </div>
 </div>

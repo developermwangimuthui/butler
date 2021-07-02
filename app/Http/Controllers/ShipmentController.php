@@ -129,8 +129,12 @@ class ShipmentController extends Controller
      * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shipment $shipment)
+    public function destroy(Shipment $shipment, $id)
     {
         //
+        $shipment->destroy($id);
+
+        return redirect()->route('shipment.index')
+        ->with('success','shipment removed successfully!');
     }
 }
