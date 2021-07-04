@@ -5,6 +5,17 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
+                @if (session('success'))
+
+                <div class="alert alert-success bg-success alert-icon-left alert-arrow-left alert-dismissible" role="alert">
+                        <span class="alert-icon"><i class="la la-thumbs-o-up"></i></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                       <p>{{session('success') }}</p>
+                </div>
+                @endif
+
                 <h3 class="content-header-title">Trucks</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
@@ -21,7 +32,7 @@
             </div>
             <div class="content-header-right col-md-6 col-12">
                 <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-                    <button class="btn btn-info round  box-shadow-2 px-2 mb-1" data-toggle="modal" data-backdrop="false" data-target="#info"><i class="ft-plus icon-left"></i> Add Trucks</button>
+                    <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addTruck" ><i class="ft-plus icon-left"></i> Add Trucks</button>
 
                 </div>
             </div>
@@ -71,7 +82,20 @@
                                                 <td>{{$truck->owners_name}}</td>
                                                 <td>{{$truck->owners_phone}}</td>
                                                 <td>
-                                                    <span><a class="ft-edit-1" href="{{route('truck.edit',$truck->id)}}" title="delete"></a></span>
+
+                                                    <span><i class="ft-edit-1"
+                                                        id="editTruck"
+                                                            data-id="{{ $truck->id }}"
+                                                            data-truck_type="{{ $truck->truck_type}}"
+                                                            data-registration=" {{ $truck->registration }}"
+                                                            data-model=" {{ $truck->model }}"
+                                                            data-load_capacity="{{ $truck->load_capacity }}"
+                                                            data-cargo_bed_dimensions="{{ $truck->cargo_bed_dimensions }}"
+                                                            data-owners_name="{{ $truck->owners_name }}"
+                                                            data-owners_phone="{{ $truck->owners_phone }}"
+                                                            title="edit">
+                                                        </i>
+                                                    </span>
                                                     &nbsp;&nbsp;
                                                     <a href="{{route('truck.delete',$truck->id)}}" class="edit" style="color:#967ADC"><i class="ft-trash-2"></i></a>
                                                 </td>
@@ -109,8 +133,8 @@
 
 
 <!-- Modal -->
-<div class="modal fade text-left" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade text-left" id="truck_info" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="myModalLabel11" aria-hidden="true">
+    <div class="modal-lg modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-info white">
                 <h4 class="modal-title white" id="myModalLabel11">Add Truck</h4>
@@ -119,53 +143,67 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form" method="POST" action="{{route('truck.store')}}">
+                <form class="form" method="POST" action="{{route('truck.store')}}" enctype="multipart/form-data">
+                    <input type="hidden" id="add_truck_method" name="_method" value="POST">
                     @csrf
                     <div class="form-body">
+                        <div class="row">
 
-                        <div class="form-group">
-                            <label for="complaintinput1">Registration</label>
-                            <input type="text" id="complaintinput1" class="form-control round"  name="registration">
+                            <div class="form-group col-md-6">
+                                <label for="registration">Registration</label>
+                                <input type="text" id="registration" class="form-control round"  name="registration">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="model">Truck Model</label>
+                                <input type="text" id="model" class="form-control round"  name="model">
+                            </div>
+
                         </div>
+                        <div class="row">
 
-                        <div class="form-group">
-                            <label for="complaintinput2">Truck Model</label>
-                            <input type="text" id="complaintinput2" class="form-control round"  name="model">
+                            <div class="form-group col-md-6">
+                                <label for="load_capacity">Load Capacity</label>
+                                <input type="text" id="load_capacity" class="form-control round"  name="load_capacity">
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label for="truck_type">Truck Type</label>
+                                <input type="text" id="truck_type" class="form-control round"  name="truck_type">
+                            </div>
+
                         </div>
+                        <div class="row">
 
-                        <div class="form-group">
-                            <label for="complaintinput3">Load Capacity</label>
-                            <input type="text" id="complaintinput2" class="form-control round"  name="load_capacity">
+                            <div class="form-group col-md-6">
+                                <label for="cargo_bed_dimensions">Cargo Bed DImensions</label>
+                                <input type="text" id="cargo_bed_dimensions" class="form-control round"  name="cargo_bed_dimensions">
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label for="owners_name">Owners Name</label>
+                                <input type="text" id="owners_name" class="form-control round" name="owners_name">
+                            </div>
+
                         </div>
+                        <div class="row">
 
-
-                        <div class="form-group">
-                            <label for="complaintinput4">Truck Type</label>
-                            <input type="text" id="complaintinput4" class="form-control round"  name="truck_type">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="complaintinput5">Cargo Bed DImensions</label>
-                            <input type="text" id="complaintinput4" class="form-control round"  name="cargo_bed_dimensions">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="complaintinput6">Owners Name</label>
-                            <input type="text" id="complaintinput6" class="form-control round" name="owners_name">
-                        </div>
-                        <div class="form-group">
-                            <label for="complaintinput6">Owners Phone</label>
-                            <input type="text" id="complaintinput6" class="form-control round" name="owners_phone">
+                            <div class="form-group col-md-6">
+                                <label for="owners_phone">Owners Phone</label>
+                                <input type="text" id="owners_phone" class="form-control round" name="owners_phone">
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-actions">
-                        <button type="button" class="btn btn-warning mr-1">
+                        <input type="hidden" name="id" id="id" value="">
+
+                        <button type="button" data-dismiss="modal" class="btn btn-warning mr-1">
                             <i class="ft-x"></i> Cancel
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" id="submit_btn" class="btn btn-primary">
                             <i class="la la-check-square-o"></i> Save
                         </button>
                     </div>
@@ -175,5 +213,69 @@
         </div>
     </div>
 </div>
+<script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>
+<script>
+
+     /* ===================== Add Truck Toggle ============================ */
+     $(document).on("click", "#addTruck", function (e) {
+        e.preventDefault();
+
+        $('#submit_btn').text("Save");
+        $('#myModalLabel11').text("Add Truck");
+
+        $('#add_truck_method').val('POST');
+
+        $('#email').prop('disabled', false)
+        $('#name').prop('disabled', false)
+
+
+
+        $('#id').val('');
+        $('#registration').val('');
+        $('#model').val('');
+        $('#load_capacity').val('');
+        $('#truck_type').val('');
+        $('#cargo_bed_dimensions').val('');
+        $('#owners_name').val('');
+        $('#owners_phone').val('');
+
+
+        $('#truck_info').modal('show');
+    });
+
+     /* ===================== Edit Truck Toggle ============================ */
+     $(document).on("click", "#editTruck", function (e) {
+        e.preventDefault();
+
+        $('#submit_btn').text("Update");
+        $('#myModalLabel11').text("Edit Truck");
+
+
+       let id = $(this).attr('data-id'),
+            registration = $(this).attr('data-registration'),
+            model = $(this).attr('data-model'),
+            load_capacity = $(this).attr('data-load_capacity'),
+            truck_type = $(this).attr('data-truck_type'),
+            cargo_bed_dimensions = $(this).attr('data-cargo_bed_dimensions');
+            owners_name = $(this).attr('data-owners_name');
+            owners_phone = $(this).attr('data-owners_phone');
+
+
+        $('#add_truck_method').val('PUT');
+
+
+        $('#id').val(id);
+        $('#registration').val(registration);
+        $('#model').val(model);
+        $('#load_capacity').val(load_capacity);
+        $('#truck_type').val(truck_type);
+        $('#cargo_bed_dimensions').val(cargo_bed_dimensions);
+        $('#owners_name').val(owners_name);
+        $('#owners_phone').val(owners_phone);
+
+
+        $('#truck_info').modal('show');
+    });
+</script>
 
 @endsection

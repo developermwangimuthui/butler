@@ -15,6 +15,7 @@ class TruckController extends Controller
     public function index()
     {
         $trucks = Truck::all();
+
         return view('backend.trucks.index',compact('trucks'));
     }
 
@@ -72,9 +73,10 @@ class TruckController extends Controller
      * @param  \App\Models\Truck  $truck
      * @return \Illuminate\Http\Response
      */
-    public function edit(Truck $truck)
+    public function edit(Truck $truck, $id)
     {
         //
+
     }
 
     /**
@@ -87,6 +89,21 @@ class TruckController extends Controller
     public function update(Request $request, Truck $truck)
     {
         //
+        $data = $request->all();
+
+        $truck = Truck::find($data['id']);
+
+        $truck->fill($data);
+
+        if ($truck->save()) {
+            return redirect()->route('truck.index')
+            ->with('success', 'Truck Updated successfully!');
+        }else {
+
+            return redirect()->back()
+                ->with('failure', 'Truck not added!');
+        }
+
     }
 
     /**
@@ -95,8 +112,11 @@ class TruckController extends Controller
      * @param  \App\Models\Truck  $truck
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Truck $truck)
+    public function destroy(Truck $truck, $id)
     {
-        
+        $truck->destroy($id);
+
+        return redirect()->back()
+            ->with('success', 'Truck removed successfully!');
     }
 }
