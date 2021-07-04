@@ -21,7 +21,7 @@
                 </div>
                 <div class="content-header-right col-md-6 col-12">
                     <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-                        <button class="btn btn-info round  box-shadow-2 px-2 mb-1" data-toggle="modal" data-backdrop="false" data-target="#info"><i class="ft-plus icon-left"></i> Add Locations</button>
+                        <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addLocation"><i class="ft-plus icon-left"></i> Add Locations</button>
 
                     </div>
                 </div>
@@ -60,11 +60,12 @@
                                                         <td>{{ $location->name }}</td>
                                                         <td> {{ $location->description }}</td>
                                                         <td>
-                                                            <span><i class="ft-edit-1" data-toggle="modal"
-                                                                    data-target="#info"
+                                                            <span><i class="ft-edit-1" id="editLocation"
                                                                     data-id="{{ $location->id }}"
-                                                                    data-action="edit"
-                                                                    title="edit">
+                                                                    data-name="{{ $location->name }}"
+                                                                    data-description="{{ $location->description }}"
+                                                                    title="edit"
+                                                                    >
                                                                 </i>
                                                             </span>
                                                             &nbsp;&nbsp;
@@ -101,7 +102,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade text-left" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11" aria-hidden="true">
+<div class="modal fade text-left" id="location_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-info white">
@@ -112,6 +113,7 @@
             </div>
             <div class="modal-body">
                 <form class="form" method="POST" action="{{ route('location.store') }}">
+                    <input type="hidden" id="add_location_method" name="_method" value="POST">
                     @csrf
                     <div class="form-body">
                         <div class="form-group">
@@ -120,17 +122,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="complaintinput3">Location Description</label>
-                            <input type="text" id="complaintinput3" class="form-control round"
+                            <label for="description">Location Description</label>
+                            <input type="text" id="description" class="form-control round"
                                 name="description">
                         </div>
 
 
                         <div class="form-actions">
+                            <input type="hidden" name="id" id="id">
                             <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
                                 <i class="ft-x"></i> Cancel
                             </button>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" id="submit_btn" class="btn btn-primary">
                                 <i class="la la-check-square-o"></i> Save
                             </button>
                         </div>
@@ -141,4 +144,51 @@
         </div>
     </div>
 </div>
+
+<script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>
+<script>
+
+     /* ===================== Add Location Toggle ============================ */
+     $(document).on("click", "#addLocation", function (e) {
+        e.preventDefault();
+
+        $('#submit_btn').text("Save");
+        $('#myModalLabel11').text("Add Location");
+
+        $('#add_location_method').val('POST');
+
+
+        $('#id').val('');
+        $('#name').val('');
+        $('#description').val('');
+
+
+
+        $('#location_info').modal('show');
+    });
+
+     /* ===================== Edit Truck Toggle ============================ */
+     $(document).on("click", "#editLocation", function (e) {
+        e.preventDefault();
+
+        $('#submit_btn').text("Update");
+        $('#myModalLabel11').text("Edit Location");
+
+
+       let id = $(this).attr('data-id'),
+            name = $(this).attr('data-name'),
+            description = $(this).attr('data-description');
+
+
+        $('#add_location_method').val('PUT');
+
+
+        $('#id').val(id);
+        $('#name').val(name);
+        $('#description').val(description);
+
+
+        $('#location_info').modal('show');
+    });
+</script>
 @endsection

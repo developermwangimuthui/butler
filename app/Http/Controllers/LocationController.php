@@ -90,6 +90,21 @@ class LocationController extends Controller
     public function update(Request $request, Location $location)
     {
         //
+        $data = $request->all();
+
+        $location = Location::find($data['id']);
+
+        $location->fill($data);
+
+        if ($location->save()) {
+            return redirect()->back()
+                ->with('success', 'location Updated successfully!');
+        } else {
+
+            return redirect()->back()
+                ->with('failure', 'OOPS an Error Occured!');
+        }
+
     }
 
     /**
@@ -103,7 +118,7 @@ class LocationController extends Controller
         //
         $location->destroy($id);
 
-        return redirect()->route('location.index')
+        return redirect()->back()
         ->with('success','Location removed successfully!');
     }
 }

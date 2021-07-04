@@ -10,4 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Location extends Model
 {
     use HasFactory;
+
+    Protected $fillable = [
+        'name',
+        'description'
+    ];
 }
