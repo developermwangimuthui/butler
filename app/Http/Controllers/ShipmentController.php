@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Shipment;
+use App\Models\Truck;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -14,8 +17,9 @@ class ShipmentController extends Controller
      */
     public function index()
     {
+        $shipments= Shipment::all();
 
-        return view('backend.shipment.index');
+        return view('backend.shipment.index', compact('shipments'));
     }
 
     /**
@@ -26,6 +30,10 @@ class ShipmentController extends Controller
     public function create()
     {
         //
+        $customers = Customer::all();
+        $trucks = Truck::all();
+
+        return view('backend.shipment.create', compact('customers', 'trucks'));
     }
 
     /**
@@ -40,6 +48,7 @@ class ShipmentController extends Controller
             'customer_id' => 'required',
             'truck_id' => 'required',
             'loading_point' => 'required',
+            'cargo_description' => 'required',
             'shipment_dispatch_date' => 'required',
             'shipment_dispatch_time' => 'required',
             'shipment_arrival_date' => 'required',
@@ -51,7 +60,6 @@ class ShipmentController extends Controller
             'delivery_point_5' => 'required',
             'order_delivery_status' => 'required',
             'delivery_note_number' => 'required',
-            'delivery_note_image' => 'required',
             'invoice_date' => 'required',
             'order_payment_status' => 'required',
             'transporter_rate_per_trip' => 'required',
@@ -59,32 +67,25 @@ class ShipmentController extends Controller
 
         ]);
 
+        $data = $request->all();
+
+        if ($request->hasFile('delivery_note_image')) {
+            $thumb = $request->file('delivery_note_image');
+            $thumb_file = $this->uploadImage($thumb, DIR_DELIVERY_NOTES_IMAGES);
+            $data['delivery_note_image'] = $thumb_file;
+        }
+
         $shipment = new Shipment();
-        $shipment->customer_id = $request->input('customer_id');
-        $shipment->truck_id = $request->input('truck_id');
-        $shipment->loading_point = $request->input('loading_point');
-        $shipment->shipment_dispatch_date = $request->input('shipment_dispatch_date');
-        $shipment->shipment_dispatch_time = $request->input('shipment_dispatch_time');
-        $shipment->shipment_arrival_date = $request->input('shipment_arrival_date');
-        $shipment->shipment_arrival_time = $request->input('shipment_arrival_time');
-        $shipment->delivery_point_1 = $request->input('delivery_point_1');
-        $shipment->delivery_point_2 = $request->input('delivery_point_2');
-        $shipment->delivery_point_3 = $request->input('delivery_point_3');
-        $shipment->delivery_point_4 = $request->input('delivery_point_4');
-        $shipment->delivery_point_5 = $request->input('delivery_point_5');
-        $shipment->order_delivery_status = $request->input('order_delivery_status');
-        $shipment->delivery_note_number = $request->input('delivery_note_number');
-        $shipment->delivery_note_image = $request->input('delivery_note_image');
-        $shipment->invoice_date = $request->input('invoice_date');
-        $shipment->order_payment_status = $request->input('order_payment_status');
-        $shipment->transporter_rate_per_trip = $request->input('transporter_rate_per_trip');
-        $shipment->trip_challenges = $request->input('trip_challenges');
+
+        $shipment->fill($data);
+
         if ($shipment->save()) {
             return redirect()->route('shipment.index')
                 ->with('success', 'Shipment added successfully!');
         } else {
 
-            return redirect()->route('shipment.index')
+            return redirect()->back()
+                ->withInput()
                 ->with('failure', 'Shipment not added!');
         }
     }
@@ -106,9 +107,14 @@ class ShipmentController extends Controller
      * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shipment $shipment)
+    public function edit(Shipment $shipment, $id )
     {
         //
+        $shipment= Shipment::find($id);
+        $customers = Customer::all();
+        $trucks = Truck::all();
+
+        return view('backend.shipment.edit', compact('customers', 'trucks','shipment'));
     }
 
     /**
@@ -121,6 +127,30 @@ class ShipmentController extends Controller
     public function update(Request $request, Shipment $shipment)
     {
         //
+       
+
+        if ($request->hasFile('delivery_note_image')) {
+            $thumb = $request->file('delivery_note_image');
+            $thumb_file = $this->uploadImage($thumb, DIR_DELIVERY_NOTES_IMAGES);
+            $data['delivery_note_image'] = $thumb_file;
+        }
+
+        $data = $request->all();
+
+        $shipment = Shipment::find($data['id']);
+
+        $shipment->fill($data);
+
+        if ($shipment->save()) {
+            return redirect()->route('shipment.index')
+                ->with('success', 'Shipment Updated successfully!');
+        } else {
+
+            return redirect()->back()
+                ->withInput()
+                ->with('failure', 'OOPS! an Error occurred');
+        }
+
     }
 
     /**
@@ -134,7 +164,7 @@ class ShipmentController extends Controller
         //
         $shipment->destroy($id);
 
-        return redirect()->route('shipment.index')
+        return redirect()->back()
         ->with('success','shipment removed successfully!');
     }
 }
