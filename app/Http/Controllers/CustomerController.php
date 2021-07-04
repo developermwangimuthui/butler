@@ -15,7 +15,8 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function test () {
+    public function test()
+    {
         $data = Customer::all();
 
         return response()->json($data, 200);
@@ -68,18 +69,15 @@ class CustomerController extends Controller
 
             $userId = $user->id;
 
-            if ($userId) {
+            $customer = new Customer();
+            $customer->phone = $request->input('phone');
+            $customer->user_id = $userId;
+            $customer->town = $request->input('town');
+            $customer->location_description = $request->input('location_description');
 
-                $customer = new Customer();
-                $customer->phone = $request->input('phone');
-                $customer->user_id = $userId;
-                $customer->town = $request->input('town');
-                $customer->location_description = $request->input('location_description');
-
-                if ($customer->save()) {
-                    return redirect()->route('customer.index')
-                        ->with('success', 'Customer added successfully!');
-                }
+            if ($customer->save()) {
+                return redirect()->route('customer.index')
+                    ->with('success', 'Customer added successfully!');
             } else {
 
                 return redirect()->route('customer.index')
@@ -128,7 +126,22 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+
+        $data = $request->all();
+
+        $customer = Customer::find($data['id']);
+
+
+        $customer->fill($data);
+
+        if ($customer->save()) {
+            return redirect()->route('customer.index')
+                ->with('success', 'Customer Updated successfully!');
+        } else {
+
+            return redirect()->back()
+                ->with('failure', 'OOPS an Error Occured!');
+        }
     }
 
     /**
@@ -143,6 +156,6 @@ class CustomerController extends Controller
         $customer->destroy($id);
 
         return redirect()->route('customer.index')
-        ->with('success','customer removed successfully!');
+            ->with('success', 'customer removed successfully!');
     }
 }

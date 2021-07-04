@@ -5,6 +5,17 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
+                    @if (session('success'))
+
+                    <div class="alert alert-success bg-success alert-icon-left alert-arrow-left alert-dismissible" role="alert">
+                            <span class="alert-icon"><i class="la la-thumbs-o-up"></i></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                           <p>{{session('success') }}</p>
+                    </div>
+                    @endif
+
                     <h3 class="content-header-title">Customers</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
@@ -21,8 +32,7 @@
                 </div>
                 <div class="content-header-right col-md-6 col-12">
                     <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-                        <button class="btn btn-info round  box-shadow-2 px-2 mb-1" data-toggle="modal" data-backdrop="false"
-                            data-target="#customer_info"><i class="ft-plus icon-left"></i> Add Customers</button>
+                        <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addCustomer" ><i class="ft-plus icon-left"></i> Add Customers</button>
 
                     </div>
                 </div>
@@ -65,10 +75,14 @@
                                                         <td>{{ $customer->town }}</td>
                                                         <td>{{ $customer->location_description }}</td>
                                                         <td>
-                                                            <span><i class="ft-edit-1" data-toggle="modal"
-                                                                    data-target="#customer_info"
+                                                            <span><i class="ft-edit-1"
+                                                                id="editCustomer"
                                                                     data-id="{{ $customer->id }}"
-                                                                    data-action="edit"
+                                                                    data-name="{{ $customer->user->name }}"
+                                                                    data-email=" {{ $customer->user->email }}"
+                                                                    data-phone=" {{ $customer->phone }}"
+                                                                    data-town="{{ $customer->town }}"
+                                                                    data-location_description="{{ $customer->location_description }}"
                                                                     title="edit">
                                                                 </i>
                                                             </span>
@@ -117,6 +131,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form" method="POST" action="{{ route('customer.store') }}">
+                        <input type="hidden" id="add_customer_method" name="_method" value="POST">
                         @csrf
                         <div class="form-body">
                             <div class="form-group">
@@ -125,32 +140,33 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="name">Email</label>
+                                <label for="email">Email</label>
                                 <input type="email" id="email" class="form-control round" name="email">
                             </div>
 
                             <div class="form-group">
-                                <label for="complaintinput1">Phone</label>
-                                <input type="text" id="complaintinput1" class="form-control round" name="phone">
+                                <label for="phone">Phone</label>
+                                <input type="text" id="phone" class="form-control round" name="phone">
                             </div>
 
                             <div class="form-group">
-                                <label for="complaintinput2">Town</label>
-                                <input type="text" id="complaintinput2" class="form-control round" name="town">
+                                <label for="town">Town</label>
+                                <input type="text" id="town" class="form-control round" name="town">
                             </div>
 
                             <div class="form-group">
-                                <label for="complaintinput3">Location Description</label>
-                                <input type="text" id="complaintinput3" class="form-control round"
+                                <label for="location_description">Location Description</label>
+                                <input type="text" id="location_description" class="form-control round"
                                     name="location_description">
                             </div>
 
 
                             <div class="form-actions">
+                                <input type="hidden" name="id" id="id" value="">
                                 <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
                                     <i class="ft-x"></i> Cancel
                                 </button>
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" id="submit_btn" class="btn btn-primary">
                                     <i class="la la-check-square-o"></i> Save
                                 </button>
                             </div>
@@ -163,7 +179,65 @@
     </div>
 
     <script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>
+    <script>
 
-    
+         /* ===================== Add Customer Toggle ============================ */
+         $(document).on("click", "#addCustomer", function (e) {
+            e.preventDefault();
+
+            $('#submit_btn').text("Save");
+            $('#myModalLabel11').text("Add Customer");
+            $('#add_customer_method').val('POST');
+
+            $('#email').prop('disabled', false)
+            $('#name').prop('disabled', false)
+
+
+
+            $('#id').val('');
+            $('#name').val('');
+            $('#email').val('');
+            $('#phone').val('');
+            $('#town').val('');
+            $('#location_description').val('');
+
+
+            $('#customer_info').modal('show');
+        });
+
+         /* ===================== Edit Customer Toggle ============================ */
+         $(document).on("click", "#editCustomer", function (e) {
+            e.preventDefault();
+
+            $('#submit_btn').text("Update");
+            $('#myModalLabel11').text("Edit Customer");
+
+            $('#email').prop('disabled', true)
+            $('#name').prop('disabled', true)
+
+
+           let id = $(this).attr('data-id'),
+                name = $(this).attr('data-name'),
+                email = $(this).attr('data-email'),
+                phone = $(this).attr('data-phone'),
+                town = $(this).attr('data-town'),
+                location_description = $(this).attr('data-location_description');
+
+
+            $('#add_customer_method').val('PUT');
+
+
+            $('#id').val(id);
+            $('#name').val(name);
+            $('#email').val(email);
+            $('#phone').val(phone);
+            $('#town').val(town);
+            $('#location_description').val(location_description);
+
+            $('#customer_info').modal('show');
+        });
+    </script>
+
+
 
 @endsection
