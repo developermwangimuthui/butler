@@ -75,3 +75,24 @@ Route::put('/shipment/update', [ShipmentController::class, 'update'])->name('shi
 Route::get('/shipment/delete/{id}', [ShipmentController::class, 'destroy'])->name('shipment.delete');
 
 
+Route::get('clear_cache', function () {
+
+    \Artisan::call('cache:clear');
+
+    dd("Cache is cleared");
+
+});
+Route::get('optimize_clear', function () {
+
+    \Artisan::call('optimize:clear');
+
+    return "Cache is cleared";
+
+});
+Route::get('composer', function () {
+
+    \Artisan::call('composer dump-autoload');
+
+    return "Composer dump";
+
+});
