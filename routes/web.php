@@ -91,7 +91,7 @@ Route::get('optimize_clear', function () {
 });
 Route::get('composer', function () {
 
-    \Artisan::call('composer dump-autoload');
+    \Artisan::call('composer dumpautoload');
 
     return "Composer dump";
 
