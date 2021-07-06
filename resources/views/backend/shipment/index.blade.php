@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="card-content collapse show">
-                                    <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
+                                    <div class="card-body card-dashboard dataTables_wrpper dt-bootstrap">
 
                                         <table class="table table-striped table-bordered file-export responsive dataex-res-configuration">
                                             <thead>
@@ -113,12 +113,4 @@
 
     <script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>
 
-<script>
-    /* $(function () {
-
-        $('.dataex-res-configuration').DataTable({
-        responsive: true
-    });
-    }); */
-</script>
 @endsection

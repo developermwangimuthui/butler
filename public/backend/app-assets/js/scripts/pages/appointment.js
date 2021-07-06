@@ -47,8 +47,8 @@ $(window).on("load", function(){
             }]
         },
         title: {
-            display: false,
-            text: 'Appointment Statistics'
+            display: true,
+            text: 'Shipment Statistics'
         }
     };
 
@@ -58,7 +58,7 @@ $(window).on("load", function(){
         labels: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
         datasets: [{
             type: 'line',
-            label: "Appointment",
+            label: "On-Time No Damage",
             data: [40, 60, 80, 60, 75, 60, 70],
             borderColor: "rgb(30,159,242)",
             backgroundColor: "transparent",
@@ -70,37 +70,121 @@ $(window).on("load", function(){
             pointRadius: 4,
         },{
             type: 'bar',
-            label: "Fulfilled",
+            label: "On-Time In-Transit Damages",
             data: [70, 75, 90, 60, 80, 75, 65],
             backgroundColor: "#00A5A8",
             borderColor: "transparent",
             borderWidth: 2
         }, {
             type: 'bar',
-            label: "Booked",
+            label: "Late No Damage",
             data: [60, 65, 80, 62, 90, 80, 70],
             backgroundColor: "#FF4081",
             borderColor: "transparent",
             borderWidth: 2
         }, {
             type: 'bar',
-            label: "Arrived",
+            label: "Late In-Transit Damages",
+            data: [42, 45, 65, 40, 42, 63, 35],
+            backgroundColor: "#626e82",
+            borderColor: "transparent",
+            borderWidth: 2
+        }]
+    };
+
+    var config = {
+        type: 'bar',
+
+        // Chart Options
+        options : chartOptions,
+
+        data : chartData
+    };
+
+    // Create the chart
+    var lineChart = new Chart(ctx, config);
+
+
+
+
+
+
+    //Get the context of the second Chart canvas element we want to select
+    var ctx = $("#combo-bar-line-2");
+    Chart.Legend.prototype.afterFit = function() {
+        this.height = this.height + 50;
+    };
+    // Chart Options
+    var chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+                display: true,
+                barPercentage: 0.75,
+                categoryPercentage: 0.3,
+                gridLines: {
+                    color: "#f3f3f3",
+                    drawTicks: false,
+                },
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Days'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                gridLines: {
+                    color: "#f3f3f3",
+                    drawTicks: false,
+                },
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Value'
+                }
+            }]
+        },
+        title: {
+            display: true,
+            text: 'Shipment Statistics'
+        }
+    };
+
+
+    // Chart Data
+    var chartData = {
+        labels: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+        datasets: [{
+            type: 'line',
+            label: "Awaiting consolidation for invoice",
+            data: [40, 60, 80, 60, 75, 60, 70],
+            borderColor: "rgb(30,159,242)",
+            backgroundColor: "transparent",
+            borderWidth: 2,
+            pointBorderColor: "#1e9ff2",
+            pointBackgroundColor: "#FFF",
+            pointBorderWidth: 2,
+            pointHoverBorderWidth: 2,
+            pointRadius: 4,
+        }, {
+            type: 'bar',
+            label: "Partially Paid (50%)- Balance Invoiced",
+            data: [60, 65, 80, 62, 90, 80, 70],
+            backgroundColor: "#FF4081",
+            borderColor: "transparent",
+            borderWidth: 2
+        }, {
+            type: 'bar',
+            label: "Invoiced and fully paid",
             data: [42, 45, 65, 40, 42, 63, 35],
             backgroundColor: "#626e82",
             borderColor: "transparent",
             borderWidth: 2
         }, {
             type: 'bar',
-            label: "No Show",
-            data: [50, 55, 70, 40, 47, 65, 38],
-            backgroundColor: "#FF6E40",
-            borderColor: "transparent",
-            borderWidth: 2
-        }, {
-            type: 'bar',
-            label: "Reschedule",
-            data: [40, 40, 45, 45, 45, 40, 45],
-            backgroundColor: "#7C4DFF",
+            label: "Invoiced awaiting payment",
+            data: [42, 45, 65, 40, 42, 63, 35],
+            backgroundColor: "#626e82",
             borderColor: "transparent",
             borderWidth: 2
         }]

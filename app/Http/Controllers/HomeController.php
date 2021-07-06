@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Shipment;
+use App\Models\Truck;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('backend.home.index');
+        $customers = Customer::all()->count();
+        $trucks = Truck::all()->count();
+        $shipments = Shipment::all()->count();
+
+
+        return view('backend.home.index', compact('customers', 'trucks', 'shipments'));
     }
 }
