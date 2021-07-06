@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a06269a9461c7f02b440a35e53cbb4ffcb6926ff',
+        'reference' => 'd04683868424c2fdb7806b9ce9141b40e3f3eff7',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -400,7 +400,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a06269a9461c7f02b440a35e53cbb4ffcb6926ff',
+            'reference' => 'd04683868424c2fdb7806b9ce9141b40e3f3eff7',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -467,12 +467,12 @@
             'dev_requirement' => true,
         ),
         'monolog/monolog' => array(
-            'pretty_version' => '2.2.0',
-            'version' => '2.2.0.0',
+            'pretty_version' => '2.3.0',
+            'version' => '2.3.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
-            'reference' => '1cb1cde8e8dd0f70cc0fe51354a59acad9302084',
+            'reference' => 'df991fd88693ab703aa403413d83e15f688dae33',
             'dev_requirement' => false,
         ),
         'mtdowling/cron-expression' => array(
@@ -503,12 +503,12 @@
             'dev_requirement' => false,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v4.10.5',
-            'version' => '4.10.5.0',
+            'pretty_version' => 'v4.11.0',
+            'version' => '4.11.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
-            'reference' => '4432ba399e47c66624bc73c8c0f811e5c109576f',
+            'reference' => 'fe14cf3672a149364fb66dfe11bf6549af899f94',
             'dev_requirement' => false,
         ),
         'nunomaduro/collision' => array(
@@ -733,8 +733,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0.0',
-                1 => '1.0',
+                0 => '1.0',
+                1 => '1.0.0',
             ),
         ),
         'psr/simple-cache' => array(
