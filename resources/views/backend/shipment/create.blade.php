@@ -230,7 +230,7 @@
                                                                 required value="{{ old('order_delivery_status') }}">
                                                                 <option disabled selected>Choose one</option>
                                                                 <optgroup label="Order Delivery Status">
-                                                                    @foreach (ORDER_DELIVERY_STATUS as $key => $order_delivery_status)
+                                                                    @foreach ($ORDER_DELIVERY_STATUS as $key => $order_delivery_status)
                                                                         <option value={{ $key }}>
                                                                             {{ $order_delivery_status }} </option>
                                                                     @endforeach
@@ -245,7 +245,7 @@
                                                                 required value="{{ old('order_payment_status') }}">
                                                                 <option disabled selected>Choose one</option>
                                                                 <optgroup label="Order Payment Status">
-                                                                    @foreach (ORDER_PAYMENT_STATUS as $key => $order_payment_status)
+                                                                    @foreach ($ORDER_PAYMENT_STATUS as $key => $order_payment_status)
                                                                         <option value={{ $key }}>
                                                                             {{ $order_payment_status }} </option>
                                                                     @endforeach
@@ -261,7 +261,7 @@
                                                                 class="form-control round" name="delivery_note_number"
                                                                 required value="{{ old('delivery_note_number') }}">
                                                         </div>
-                                                        <img style='height: 80px; width: 100px; border: 1px solid #000;' id="image_preview" src="" alt=""/>
+                                                        <img style='height: 80px; width: 100px; border: 1px solid #000;' id="image_preview" src="https://via.placeholder.com/100?text=image" alt=""/>
 
                                                        {{--   <div class="form-group  ">
                                                             <label for="delivery_note_image">Delivery Note Image</label>
@@ -303,7 +303,7 @@
                                                                 value="{{ old('trip_challenges') }}">
                                                                 <option disabled selected>Choose one</option>
                                                                 <optgroup label="Trip Challenges">
-                                                                    @foreach (TRIP_CHALLENGES as $key => $trip_challenges)
+                                                                    @foreach ($TRIP_CHALLENGES as $key => $trip_challenges)
                                                                         <option value={{ $key }}>
                                                                             {{ $trip_challenges }} </option>
                                                                     @endforeach

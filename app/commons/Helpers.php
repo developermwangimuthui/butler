@@ -64,11 +64,6 @@ const ORDER_DELIVERY_STATUS = [
 ];
 
 
-function getCategoryName($id){
-    $name = Customer::where('id', $id)->pluck('user_id')->first();
-    return $name;
-}
-
 function uploadImage($file, $dir)
 {
     dd($file);

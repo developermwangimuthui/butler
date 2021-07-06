@@ -7,6 +7,7 @@ use App\Models\Shipment;
 use App\Models\Truck;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ShipmentController extends Controller
 {
@@ -17,7 +18,7 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments= Shipment::all();
+        $shipments = Shipment::all();
 
         return view('backend.shipment.index', compact('shipments'));
     }
@@ -30,10 +31,46 @@ class ShipmentController extends Controller
     public function create()
     {
         //
+    $ORDER_PAYMENT_STATUS = [
+        "0" => "Partially Paid (25%)- Balance Invoiced",
+        "1" => "Partially Paid (30%)- Balance Invoiced",
+        "2" => "Partially Paid (50%)- Balance Invoiced",
+        "3" => "Partially Paid (75%)- Balance Invoiced",
+        "4" => "Invoiced and fully paid",
+        "5" => "Invoiced awaiting payment",
+        "6" => "Awaiting consolidation for invoice",
+    ];
+
+    $TRIP_CHALLENGES = [
+        "0" => "Delay- Police Arrest ",
+        "1" => "Delay- Await Loading",
+        "2" => "Delay- Await Off Loading",
+        "3" => "Delay- Security/Unrest",
+        "4" => "Delay- Awaiting Truck Repair",
+        "5" => "Delay- Accident",
+        "6" => "Delay- Slow Speed(Bumpy Road)",
+        "7" => "Delay- Slow Speed(Muddy Road)",
+        "8" => "Delay- Slow Speed(Traffic)",
+        "7" => "Delay- Lost Direction",
+        "8" => "None",
+    ];
+
+    $ORDER_DELIVERY_STATUS = [
+        "0" => "On Time, in-Full, No Damage ",
+        "1" => "On Time, in-Transit-Damages",
+        "2" => "On Time, in-Transit-Losses",
+        "3" => "Late,in-Full, No Damage",
+        "4" => "Late, in-Full, on-Transit-Damages",
+        "5" => "Late, in-Transit-Losses",
+    ];
+
+
+
+
         $customers = Customer::all();
         $trucks = Truck::all();
 
-        return view('backend.shipment.create', compact('customers', 'trucks'));
+        return view('backend.shipment.create', compact('customers', 'trucks', 'ORDER_DELIVERY_STATUS', 'ORDER_PAYMENT_STATUS', 'TRIP_CHALLENGES'));
     }
 
     /**
@@ -67,11 +104,13 @@ class ShipmentController extends Controller
 
         ]);
 
+        $DIR_DELIVERY_NOTES_IMAGES = "delivery_notes";
+
         $data = $request->all();
 
         if ($request->hasFile('delivery_note_image')) {
             $thumb = $request->file('delivery_note_image');
-            $thumb_file = $this->uploadImage($thumb, DIR_DELIVERY_NOTES_IMAGES);
+            $thumb_file = $this->uploadImage($thumb, $DIR_DELIVERY_NOTES_IMAGES);
             $data['delivery_note_image'] = $thumb_file;
         }
 
@@ -107,14 +146,48 @@ class ShipmentController extends Controller
      * @param  \App\Models\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shipment $shipment, $id )
+    public function edit(Shipment $shipment, $id)
     {
         //
-        $shipment= Shipment::find($id);
+        $ORDER_PAYMENT_STATUS = [
+            "0" => "Partially Paid (25%)- Balance Invoiced",
+            "1" => "Partially Paid (30%)- Balance Invoiced",
+            "2" => "Partially Paid (50%)- Balance Invoiced",
+            "3" => "Partially Paid (75%)- Balance Invoiced",
+            "4" => "Invoiced and fully paid",
+            "5" => "Invoiced awaiting payment",
+            "6" => "Awaiting consolidation for invoice",
+        ];
+
+        $TRIP_CHALLENGES = [
+            "0" => "Delay- Police Arrest ",
+            "1" => "Delay- Await Loading",
+            "2" => "Delay- Await Off Loading",
+            "3" => "Delay- Security/Unrest",
+            "4" => "Delay- Awaiting Truck Repair",
+            "5" => "Delay- Accident",
+            "6" => "Delay- Slow Speed(Bumpy Road)",
+            "7" => "Delay- Slow Speed(Muddy Road)",
+            "8" => "Delay- Slow Speed(Traffic)",
+            "7" => "Delay- Lost Direction",
+            "8" => "None",
+        ];
+
+        $ORDER_DELIVERY_STATUS = [
+            "0" => "On Time, in-Full, No Damage ",
+            "1" => "On Time, in-Transit-Damages",
+            "2" => "On Time, in-Transit-Losses",
+            "3" => "Late,in-Full, No Damage",
+            "4" => "Late, in-Full, on-Transit-Damages",
+            "5" => "Late, in-Transit-Losses",
+        ];
+
+
+        $shipment = Shipment::find($id);
         $customers = Customer::all();
         $trucks = Truck::all();
 
-        return view('backend.shipment.edit', compact('customers', 'trucks','shipment'));
+        return view('backend.shipment.edit', compact('customers', 'trucks', 'shipment', 'ORDER_DELIVERY_STATUS', 'ORDER_PAYMENT_STATUS', 'TRIP_CHALLENGES'));
     }
 
     /**
@@ -127,15 +200,15 @@ class ShipmentController extends Controller
     public function update(Request $request, Shipment $shipment)
     {
         //
-       
+        $DIR_DELIVERY_NOTES_IMAGES = "delivery_notes";
+
+        $data = $request->all();
 
         if ($request->hasFile('delivery_note_image')) {
             $thumb = $request->file('delivery_note_image');
-            $thumb_file = $this->uploadImage($thumb, DIR_DELIVERY_NOTES_IMAGES);
+            $thumb_file = $this->uploadImage($thumb, $DIR_DELIVERY_NOTES_IMAGES);
             $data['delivery_note_image'] = $thumb_file;
         }
-
-        $data = $request->all();
 
         $shipment = Shipment::find($data['id']);
 
@@ -150,7 +223,6 @@ class ShipmentController extends Controller
                 ->withInput()
                 ->with('failure', 'OOPS! an Error occurred');
         }
-
     }
 
     /**
@@ -165,6 +237,6 @@ class ShipmentController extends Controller
         $shipment->destroy($id);
 
         return redirect()->back()
-        ->with('success','shipment removed successfully!');
+            ->with('success', 'shipment removed successfully!');
     }
 }

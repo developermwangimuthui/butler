@@ -61,8 +61,8 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form" method="POST" action="{{ route('shipment.update') }}" enctype="multipart/form-data">
-                                            @csrf
                                             @method('PUT')
+                                            @csrf
                                             <div class="form-body">
                                                 <h4 class="form-section"> General</h4>
                                                 <div class="row">
@@ -75,7 +75,7 @@
                                                                 <option disabled selected>Choose one</option>
                                                                 <optgroup label="Customers">
                                                                     @foreach ($customers as $customer)
-                                                                        <option value={{ $customer->id }}>
+                                                                        <option value={{ $customer->id }} {{ ( $shipment->customer_id == $customer->id) ? 'selected' : '' }}>
                                                                             {{ $customer->user->name }}</option>
                                                                     @endforeach
                                                                 </optgroup>
@@ -92,7 +92,7 @@
                                                                 <option disabled selected>Choose one</option>
                                                                 <optgroup label="Truck Details">
                                                                     @foreach ($trucks as $truck)
-                                                                        <option value={{ $truck->id }}>
+                                                                        <option value={{ $truck->id }} {{ ( $shipment->truck_id == $truck->id) ? 'selected' : '' }}>
                                                                             {{ $truck->registration }}
                                                                             {{ $truck->load_capacity }}
                                                                             {{ $truck->truck_type }}</option>
@@ -229,8 +229,8 @@
                                                                 required value="{{ old('order_delivery_status') }}">
                                                                 <option disabled selected>Choose one</option>
                                                                 <optgroup label="Order Delivery Status">
-                                                                    @foreach (ORDER_DELIVERY_STATUS as $key => $order_delivery_status)
-                                                                        <option value={{ $key }}>
+                                                                    @foreach ($ORDER_DELIVERY_STATUS as $key => $order_delivery_status)
+                                                                        <option value={{ $key }} {{ ( $shipment->order_delivery_status == $key) ? 'selected' : '' }}>
                                                                             {{ $order_delivery_status }} </option>
                                                                     @endforeach
                                                                 </optgroup>
@@ -239,8 +239,8 @@
 
                                                     </div>
 
-                                                    <div class="col-md-6">  
-                                                        
+                                                    <div class="col-md-6">
+
                                                         <div class="form-group  ">
                                                             <label for="order_payment_status">Order payment Status</label>
                                                             <select class="select2 form-control block"
@@ -248,15 +248,15 @@
                                                                 required value="{{ old('order_payment_status') }}">
                                                                 <option disabled selected>Choose one</option>
                                                                 <optgroup label="Order Payment Status">
-                                                                    @foreach (ORDER_PAYMENT_STATUS as $key => $order_payment_status)
-                                                                        <option value={{ $key }}>
+                                                                    @foreach ($ORDER_PAYMENT_STATUS as $key => $order_payment_status)
+                                                                        <option value={{ $key }} {{ ( $shipment->order_payment_status == $key) ? 'selected' : '' }} >
                                                                             {{ $order_payment_status }} </option>
                                                                     @endforeach
                                                                 </optgroup>
                                                             </select>
                                                         </div>
-                                                                                                             
-                                                        <img style='height: 80px; width: 100px; border: 1px solid #000;' id="image_preview" src="" alt=""/>
+
+                                                        <img style='height: 80px; width: 100px; border: 1px solid #000;' id="image_preview" src="{{ $shipment->delivery_note_image ? asset("uploads/delivery_notes/{$shipment->delivery_note_image}") : "https://via.placeholder.com/100?text=image"}}" alt=""/>
 
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input" name="delivery_note_image"
@@ -266,8 +266,8 @@
                                                         </div>
 
                                                     </div>
-                                                </div>                                                
-                                                
+                                                </div>
+
 
                                                 <h4 class="form-section">Transporter Details</h4>
 
@@ -283,19 +283,19 @@
                                                         </div>
 
                                                     </div>
-                                               
+
                                                     <div class="col-md-6">
 
                                                         <div class="form-group  ">
                                                             <label for="trip_challenges">Trip Challenges</label>
-    
+
                                                             <select class="select2 form-control block" id="trip_challenges"
                                                                 name="trip_challenges" required
                                                                 value="{{ old('trip_challenges') }}">
                                                                 <option disabled selected>Choose one</option>
                                                                 <optgroup label="Trip Challenges">
-                                                                    @foreach (TRIP_CHALLENGES as $key => $trip_challenges)
-                                                                        <option value={{ $key }}>
+                                                                    @foreach ($TRIP_CHALLENGES as $key => $trip_challenges)
+                                                                        <option value={{ $key }} {{ ( $shipment->trip_challenges == $key) ? 'selected' : '' }}>
                                                                             {{ $trip_challenges }} </option>
                                                                     @endforeach
                                                                 </optgroup>
@@ -307,9 +307,11 @@
                                             </div>
 
                                             <div class="form-actions">
-                                                <button type="button" class="btn btn-warning mr-1">
-                                                    <i class="ft-x"></i> Cancel
-                                                </button>
+                                                <a href="{{ route('shipment.index') }}">
+                                                    <button type="button" class="btn btn-warning mr-1">
+                                                        <i class="ft-x"></i> Cancel
+                                                    </button>
+                                                </a>
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> Save
                                                 </button>
