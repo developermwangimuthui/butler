@@ -179,7 +179,7 @@
                                                             <span><i class="ft-edit-1" id="edit_truck_type"
                                                                     data-id="{{ $truck_type->id }}"
                                                                     data-truck_type="{{ $truck_type->type }}"
-                                                                    data-registration=" {{ $truck_type->description }}"
+                                                                    data-description=" {{ $truck_type->description }}"
                                                                     title="edit">
                                                                 </i>
                                                             </span>
@@ -280,8 +280,8 @@
         </div>
     </div>
 
- {{--     @include('backend.trucks.modals.truck_make');
-    @include('backend.trucks.modals.truck_type');  --}}
+    @include('backend.trucks.modals.truck_type');
+    {{--  @include('backend.trucks.modals.truck_make');  --}}
 
     <!-- Modal -->
     <div class="modal fade text-left" id="truck_info" tabindex="-1" data-backdrop="false" role="dialog"

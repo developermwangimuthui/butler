@@ -82,7 +82,6 @@ class TruckTypeController extends Controller
     {
         //
         $data = $request->all();
-
         $type = Truck_type::find($data['id']);
 
         $type->fill($data);
