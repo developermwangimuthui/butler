@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Truck;
+use App\Models\Truck_make;
+use App\Models\Truck_type;
 use Illuminate\Http\Request;
 
 class TruckController extends Controller
@@ -16,7 +18,10 @@ class TruckController extends Controller
     {
         $trucks = Truck::all();
 
-        return view('backend.trucks.index',compact('trucks'));
+        $truck_types = Truck_type::all();
+        $truck_makes = Truck_make::all();
+
+        return view('backend.trucks.index',compact('trucks', 'truck_types', 'truck_makes'));
     }
 
     /**
@@ -42,9 +47,9 @@ class TruckController extends Controller
         $truck->owners_name = $request->input('owners_name');
         $truck->owners_phone = $request->input('owners_phone');
         $truck->registration = $request->input('registration');
-        $truck->model = $request->input('model');
+        $truck->make_id = $request->input('make_id');
+        $truck->type_id = $request->input('type_id');
         $truck->load_capacity = $request->input('load_capacity');
-        $truck->truck_type = $request->input('truck_type');
         $truck->cargo_bed_dimensions = $request->input('cargo_bed_dimensions');
         if ($truck->save()) {
             return redirect()->route('truck.index')

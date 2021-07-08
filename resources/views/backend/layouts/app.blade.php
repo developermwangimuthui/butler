@@ -101,6 +101,7 @@
     <script src="/backend/app-assets/vendors/js/tables/buttons.html5.min.js"></script>
     <script src="/backend/app-assets/vendors/js/tables/buttons.print.min.js"></script>
 
+    <script src="/backend/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
 
 
     <!-- END: Page Vendor JS-->
@@ -115,6 +116,9 @@
     <script src="/backend/app-assets/js/scripts/forms/wizard-steps.js"></script>
     <script src="/backend/app-assets/js/scripts/pages/appointment.js"></script>
     <script src="/backend/app-assets/js/scripts/tables/datatables/datatable-advanced.js"></script>
+    <script src="/backend/app-assets/js/scripts/forms/form-repeater.js"></script>
+
+
 
     <script src="/backend/app-assets/js/scripts/forms/select/form-select2.js"></script>
 

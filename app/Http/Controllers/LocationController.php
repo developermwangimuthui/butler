@@ -15,8 +15,10 @@ class LocationController extends Controller
     public function index()
     {
         $locations= Location::all();
+        $city = "Nairobi";
+        $town = "Kawangware";
 
-        return view('backend.locations.index', compact('locations'));
+        return view('backend.locations.index', compact('locations', 'city', 'town'));
     }
 
     /**

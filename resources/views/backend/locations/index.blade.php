@@ -50,6 +50,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
+                                                    <th>City</th>
+                                                    <th>Town</th>
                                                     <th>Description</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -59,6 +61,8 @@
                                                     <tr>
                                                         <td>{{ $location->name }}</td>
                                                         <td> {{ $location->description }}</td>
+                                                        <td> {{ $city }}</td>
+                                                        <td> {{ $town }}</td>
                                                         <td>
                                                             <span><i class="ft-edit-1" id="editLocation"
                                                                     data-id="{{ $location->id }}"
@@ -81,6 +85,8 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>Name</th>
+                                                    <th>City</th>
+                                                    <th>Town</th>
                                                     <th>Description</th>
                                                     <th>Action</th>
                                                 </tr>

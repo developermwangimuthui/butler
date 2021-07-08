@@ -7,6 +7,8 @@ use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TruckController;
+use App\Http\Controllers\TruckMakeController;
+use App\Http\Controllers\TruckTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,19 @@ Route::get('/truck/edit/{id}', [TruckController::class, 'edit'])->name('truck.ed
 Route::get('/truck/show/{id}', [TruckController::class, 'show'])->name('truck.show');
 Route::put('/truck/store', [TruckController::class, 'update'])->name('truck.update');
 Route::get('/truck/delete/{id}', [TruckController::class, 'destroy'])->name('truck.delete');
+
+// .............................Truck make............................//
+
+Route::post('/make/store', [TruckMakeController::class, 'store'])->name('make.store');
+Route::get('/make/show/{id}', [TruckMakeController::class, 'show'])->name('make.show');
+Route::put('/make/store', [TruckMakeController::class, 'update'])->name('make.update');
+Route::get('/make/delete/{id}', [TruckMakeController::class, 'destroy'])->name('make.delete');
+
+// .............................Truck type............................//
+Route::post('/type/store', [TruckTypeController::class, 'store'])->name('type.store');
+Route::get('/type/show/{id}', [TruckTypeController::class, 'show'])->name('type.show');
+Route::put('/type/store', [TruckTypeController::class, 'update'])->name('type.update');
+Route::get('/type/delete/{id}', [TruckTypeController::class, 'destroy'])->name('type.delete');
 
 //..............................Customers......................................//
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Shipment extends Model
 {
     use HasFactory;
@@ -33,7 +34,11 @@ class Shipment extends Model
         'trip_challenges',
     ];
 
-     /**
+    protected $casts = [
+        'delivery_point' => 'array',
+    ];
+
+    /**
      * Get the Customer that owns the Shipment.
      */
     public function customer()
@@ -41,7 +46,7 @@ class Shipment extends Model
         return $this->belongsTo(Customer::class);
     }
 
-     /**
+    /**
      * Get the Truck that owns the Shipment.
      */
     public function truck()

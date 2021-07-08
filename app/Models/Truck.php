@@ -16,7 +16,8 @@ class Truck extends Model
         'owners_name',
         'owners_phone',
         'registration',
-        'model',
+        'make_id',
+        'type_id',
         'load_capacity',
         'truck_type',
         'cargo_bed_dimensions',
@@ -25,5 +26,25 @@ class Truck extends Model
     public function shipments()
     {
         return $this->hasMany(Shipment::class);
+    }
+
+    /**
+     * Get the truck_make that owns the Truck
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function truck_make()
+    {
+        return $this->belongsTo(Truck_make::class, 'make_id');
+    }
+
+    /**
+     * Get the truck_make that owns the Truck
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function truck_type()
+    {
+        return $this->belongsTo(Truck_type::class, 'type_id');
     }
 }
