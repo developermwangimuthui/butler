@@ -73,7 +73,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
 
-                                        <table class="table table-striped table-bordered file-export">
+                                        <table class="table table-striped table-bordered file-export responsive dataex-res-configuration">
                                             <thead>
                                                 <tr>
                                                     <th>Truck Type</th>
@@ -281,7 +281,7 @@
     </div>
 
     @include('backend.trucks.modals.truck_type');
-    {{--  @include('backend.trucks.modals.truck_make');  --}}
+    @include('backend.trucks.modals.truck_make');
 
     <!-- Modal -->
     <div class="modal fade text-left" id="truck_info" tabindex="-1" data-backdrop="false" role="dialog"

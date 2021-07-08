@@ -1,10 +1,10 @@
 <!-- Modal -->
 <div class="modal fade text-left" id="truck_make_info" tabindex="-1" data-backdrop="false" role="dialog"
-    aria-labelledby="myModalLabel11" aria-hidden="true">
+    aria-labelledby="myModalMake" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Add Truck</h4>
+                <h4 class="modal-title white" id="myModalMake">Add Truck</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -41,8 +41,6 @@
                         </div>
 
                         <div class="form-actions">
-                            <input type="hidden" name="id" id="id" value="">
-
                             <button type="button" data-dismiss="modal" class="btn btn-warning mr-1">
                                 <i class="ft-x"></i> Cancel
                             </button>
@@ -51,32 +49,53 @@
                                     <i class="ft-plus"></i> Add
                             </a>
 
-                            <button type="submit" id="submit_btn" class="btn btn-primary">
+                            <button type="submit" id="make_submit_btn" class="btn btn-primary">
                                 <i class="la la-check-square-o"></i> Save
                             </button>
                         </div>
                     </form>
 
-                </div>
+                </div>               
+                
+            </div>
 
-                {{-- Edit Form --}}
-                <div class="edit-form d-none">
-                    <form action="">
-                        <div class="form-row edit-form ">
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade text-left" id="truck_make_edit" tabindex="-1" data-backdrop="false" role="dialog"
+    aria-labelledby="myModalMakeEdit" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info white">
+                <h4 class="modal-title white" id="myModalMakeEdit">Edit Truck Make</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="repeater-default">
+                    <form class="form" method="POST" action="{{ route('make.store') }}" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+                        <div class="form-row">
+
                             <div class="form-group mb-1 col-sm-12 col-md-4">
-                                <label for="make">Truck Make</label>
+                                <label for="edit_make">Truck Make</label>
                                 <br>
-                                <input type="text" class="form-control" id="make_make" name="make"
+                                <input type="text" class="form-control" id="edit_make" name="make"
                                     placeholder="Truck Make">
                             </div>
                             <div class="form-group mb-1 col-sm-12 col-md-4">
                                 <label for="description">Description</label>
                                 <br>
-                                <input type="text" class="form-control" id="make_description" name="description"
+                                <input type="text" class="form-control" id="edit_make_description" name="description"
                                     placeholder="optional">
                             </div>
                         </div>
-
+                       
                         <div class="form-actions">
                             <input type="hidden" name="id" id="make_id" value="">
 
@@ -84,17 +103,21 @@
                                 <i class="ft-x"></i> Cancel
                             </button>
 
-                            <button type="submit" id="make_submit_btn" class="btn btn-primary">
-                                <i class="la la-check-square-o"></i> Save
+                            <button type="submit" id="edit_submit_btn" class="btn btn-primary">
+                                <i class="la la-check-square-o"></i> Update
                             </button>
                         </div>
                     </form>
-                </div>
+
+                </div>               
+                
             </div>
 
         </div>
     </div>
 </div>
+
+
 <script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>
 <script>
     /* ===================== Add Truck Make Toggle ============================ */
@@ -102,7 +125,7 @@
         e.preventDefault();
 
         $('#submit_btn').text("Save");
-        $('#myModalLabel11').text("Add Truck Make");
+        $('#myModalMake').text("Add Truck Make");
 
         $('#add_make_method').val('POST');
 
@@ -122,28 +145,17 @@
     $(document).on("click", "#edit_Truck_Make", function(e) {
         e.preventDefault();
 
-        $('#submit_btn_1').text("Update");
-        $('#myModalLabel11').text("Edit Truck Make");
-
-        $('.repeater-default').hide()
-        $('.edit-form').show()
-
-
         let id = $(this).attr('data-id'),
             make = $(this).attr('data-make'),
             description = $(this).attr('data-description');
 
 
-
-        $('#add_make_method').val('PUT');
-
-
         $('#make_id').val(id);
-        $('#make_make').val(make);
-        $('#make_description').val(description);
+        $('#edit_make').val(make);
+        $('#edit_make_description').val(description);
 
 
 
-        $('#truck_make_info').modal('show');
+        $('#truck_make_edit').modal('show');
     });
 </script>

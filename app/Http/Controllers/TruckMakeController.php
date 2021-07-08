@@ -83,8 +83,6 @@ class TruckMakeController extends Controller
     {
         //
         $data = $request->all();
-        $truck_makes = $request->input('trucks');
-        dd($data);
 
         $make = Truck_make::find($data['id']);
 
@@ -92,10 +90,10 @@ class TruckMakeController extends Controller
 
         if ($make->save()) {
             return redirect()->route('truck.index')
-            ->with('success', 'Truck Updated successfully!');
+            ->with('success', 'Truck make Updated successfully!');
         }else {
             return redirect()->back()
-                ->with('failure', 'Truck not Updated!');
+                ->with('failure', 'Truck make not Updated!');
         }
     }
 
@@ -109,7 +107,7 @@ class TruckMakeController extends Controller
     {
         //
         $truck_make->destroy($id);
-
+        dd($id);
         return redirect()->back()
             ->with('success', 'Truck Make removed successfully!');
     }
