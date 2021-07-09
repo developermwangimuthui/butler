@@ -22,21 +22,9 @@
                 <div class="content-header-right col-md-6 col-12">
                     <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
                         <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addTruck"><i
-                                class="ft-plus icon-left"></i> Add Trucks</button>
-
+                                class="ft-plus icon-left"></i> Add Trucks
+                        </button>
                     </div>
-                    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-                        <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addMake"><i
-                                class="ft-plus icon-left"></i> Make</button>
-
-                    </div>
-                    <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-                        <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addTruckType"><i
-                                class="ft-plus icon-left"></i> Type</button>
-
-                    </div>
-
-
                 </div>
 
             </div>

@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
-                                        <table class="table table-striped table-bordered file-export">
+                                        <table class="table table-striped table-bordered file-export responsive dataex-res-configuration">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
