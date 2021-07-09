@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Shipment;
 use App\Models\Truck;
 use App\Http\Controllers\Controller;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -69,8 +70,9 @@ class ShipmentController extends Controller
 
         $customers = Customer::all();
         $trucks = Truck::all();
+        $locations = Location::all();
 
-        return view('backend.shipment.create', compact('customers', 'trucks', 'ORDER_DELIVERY_STATUS', 'ORDER_PAYMENT_STATUS', 'TRIP_CHALLENGES'));
+        return view('backend.shipment.create', compact('customers', 'trucks', 'locations','ORDER_DELIVERY_STATUS', 'ORDER_PAYMENT_STATUS', 'TRIP_CHALLENGES'));
     }
 
     /**
@@ -197,8 +199,9 @@ class ShipmentController extends Controller
         $shipment = Shipment::find($id);
         $customers = Customer::all();
         $trucks = Truck::all();
+        $locations = Location::all();
 
-        return view('backend.shipment.edit', compact('customers', 'trucks', 'shipment', 'ORDER_DELIVERY_STATUS', 'ORDER_PAYMENT_STATUS', 'TRIP_CHALLENGES'));
+        return view('backend.shipment.edit', compact('customers', 'trucks', 'shipment', 'locations', 'ORDER_DELIVERY_STATUS', 'ORDER_PAYMENT_STATUS', 'TRIP_CHALLENGES'));
     }
 
     /**

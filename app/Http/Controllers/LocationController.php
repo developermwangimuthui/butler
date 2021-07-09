@@ -15,10 +15,8 @@ class LocationController extends Controller
     public function index()
     {
         $locations= Location::all();
-        $city = "Nairobi";
-        $town = "Kawangware";
 
-        return view('backend.locations.index', compact('locations', 'city', 'town'));
+        return view('backend.locations.index', compact('locations'));
     }
 
     /**
@@ -41,13 +39,17 @@ class LocationController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'city' => 'required',
+            'town' => 'required',
             'description' => 'required',
 
         ]);
 
+        $data = $request->all();
+
         $location = new Location();
-        $location->name = $request->input('name');
-        $location->description = $request->input('description');
+
+        $location->fill($data);
 
         if ($location->save()) {
 

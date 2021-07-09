@@ -53,4 +53,14 @@ class Shipment extends Model
     {
         return $this->belongsTo(Truck::class);
     }
+
+    /**
+     * Get the location that owns the Shipment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'loading_point');
+    }
 }

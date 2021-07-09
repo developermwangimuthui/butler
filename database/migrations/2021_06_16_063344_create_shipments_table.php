@@ -19,16 +19,12 @@ class CreateShipmentsTable extends Migration
             ->constrained();
             $table->foreignId('truck_id')
             ->constrained();
-            $table->string('loading_point');
+            $table->integer('loading_point');
             $table->date('shipment_dispatch_date');
             $table->time('shipment_dispatch_time');
             $table->date('shipment_arrival_date');
             $table->time('shipment_arrival_time');
-            $table->string('delivery_point_1');
-            $table->string('delivery_point_2');
-            $table->string('delivery_point_3');
-            $table->string('delivery_point_4');
-            $table->string('delivery_point_5');
+            $table->string('delivery_point');
             $table->string('cargo_description');
             $table->string('order_delivery_status');
             $table->string('delivery_note_number');

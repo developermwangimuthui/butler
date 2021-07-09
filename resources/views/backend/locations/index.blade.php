@@ -60,13 +60,15 @@
                                                 @foreach ($locations as $location)
                                                     <tr>
                                                         <td>{{ $location->name }}</td>
+                                                        <td> {{$location->city }}</td>
+                                                        <td> {{ $location->town }}</td>
                                                         <td> {{ $location->description }}</td>
-                                                        <td> {{ $city }}</td>
-                                                        <td> {{ $town }}</td>
                                                         <td>
                                                             <span><i class="ft-edit-1" id="editLocation"
                                                                     data-id="{{ $location->id }}"
                                                                     data-name="{{ $location->name }}"
+                                                                    data-city="{{ $location->city }}"
+                                                                    data-town="{{ $location->town }}"
                                                                     data-description="{{ $location->description }}"
                                                                     title="edit"
                                                                     >
@@ -122,16 +124,38 @@
                     <input type="hidden" id="add_location_method" name="_method" value="POST">
                     @csrf
                     <div class="form-body">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" class="form-control round" name="name">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for="name">Location Name</label>
+                                    <input type="text" id="name" class="form-control round" name="name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" class="form-control round" name="city">
+                                </div>
+                               
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for="description">Location Description</label>
+                                    <input type="text" id="description" class="form-control round"
+                                        name="description">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="town">Town</label>
+                                    <input type="text" id="town" class="form-control round" name="town">
+                                </div>
+        
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="description">Location Description</label>
-                            <input type="text" id="description" class="form-control round"
-                                name="description">
-                        </div>
+                        
 
 
                         <div class="form-actions">
@@ -166,6 +190,8 @@
 
         $('#id').val('');
         $('#name').val('');
+        $('#city').val('');
+        $('#town').val('');
         $('#description').val('');
 
 
@@ -183,6 +209,8 @@
 
        let id = $(this).attr('data-id'),
             name = $(this).attr('data-name'),
+            city = $(this).attr('data-city'),
+            town = $(this).attr('data-town'),
             description = $(this).attr('data-description');
 
 
@@ -191,6 +219,8 @@
 
         $('#id').val(id);
         $('#name').val(name);
+        $('#city').val(city);
+        $('#town').val(town);
         $('#description').val(description);
 
 

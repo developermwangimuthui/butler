@@ -13,9 +13,19 @@ class Location extends Model
 
     Protected $fillable = [
         'name',
-        'description',
         'city',
-        'town'
+        'town',
+        'description'
 
     ];
+
+    /**
+     * Get all of the shipments for the Location
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function shipments()
+    {
+        return $this->hasMany(Shipment::class, 'loading_point');
+    }
 }

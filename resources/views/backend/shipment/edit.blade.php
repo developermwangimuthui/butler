@@ -95,7 +95,7 @@
                                                                         <option value={{ $truck->id }} {{ ( $shipment->truck_id == $truck->id) ? 'selected' : '' }}>
                                                                             {{ $truck->registration }}
                                                                             {{ $truck->load_capacity }}
-                                                                            {{ $truck->truck_type }}</option>
+                                                                            {{ $truck->truck_type->type }}</option>
                                                                     @endforeach
                                                                 </optgroup>
                                                             </select>
@@ -106,10 +106,21 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="complaintinput1">Loading Point:</label>
-                                                            <input type="text" id="complaintinput1"
-                                                                class="form-control round" name="loading_point" required
-                                                                value="{{ $shipment->loading_point}}">
+                                                            <label for="complaintinput1">Loading Point:</label>                                                           
+
+                                                                <select class="select2 form-control block" id="complaintinput1"
+                                                                    name="loading_point" required
+                                                                    value="{{ old('trip_challenges') }}">
+                                                                    <option disabled selected>Choose one</option>
+                                                                    <optgroup label="Trip Challenges">
+                                                                        @foreach ($locations as $location)
+                                                                            <option value={{ $location->id }} {{ ( $shipment->loading_point == $location->id) ? 'selected' : '' }}>
+                                                                                {{ $location->name }}
+                                                                                {{ $location->description }}
+                                                                        </option>
+                                                                        @endforeach
+                                                                    </optgroup>
+                                                                </select>
                                                         </div>
                                                     </div>
 

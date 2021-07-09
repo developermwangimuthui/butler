@@ -68,10 +68,17 @@
                                                 @foreach ($shipments as $shipment)
                                                     <tr>
                                                         <td>{{ $shipment->customer->user->name }}</td>
-                                                        <td> {{ $shipment->shipment_dispatch_date }} </td>
-                                                        <td> {{ $shipment->shipment_dispatch_time }}</td>
+                                                        <td> 
+                                                            {{ Carbon\Carbon::parse($shipment->shipment_dispatch_date)->toFormattedDateString() }}
+                                                            
+                                                        </td>
+
+                                                        <td> 
+                                                            {{ Carbon\Carbon::parse($shipment->shipment_dispatch_time)->toTimeString() }}
+                                                            
+                                                        </td>
                                                         <td> {{ $shipment->truck->owners_name }}</td>
-                                                        <td> {{ $shipment->loading_point }}</td>
+                                                        <td> {{ $shipment->location->name }}</td>
                                                         <td> {{ $shipment->cargo_description }}</td>
                                                         <td> {{ $shipment->delivery_note_number }}</td>
                                                         <td>

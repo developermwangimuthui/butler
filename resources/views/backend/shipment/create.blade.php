@@ -60,7 +60,8 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="steps-validation wizard-notification" method="POST" action="{{ route('shipment.store') }}" enctype="multipart/form-data">
+                                        <form class="steps-validation wizard-notification" method="POST"
+                                            action="{{ route('shipment.store') }}" enctype="multipart/form-data">
                                             @csrf
                                             <!-- Step 1 -->
                                             <h6>Step 1 (General)</h6>
@@ -106,9 +107,19 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="complaintinput1">Loading Point:</label>
-                                                            <input type="text" id="complaintinput1"
-                                                                class="form-control round" name="loading_point" required
-                                                                value="{{ old('loading_point') }}">
+
+                                                            <select class="select2 form-control block" id="complaintinput1"
+                                                                name="loading_point" required>
+                                                                <option disabled selected>Choose one</option>
+                                                                <optgroup label="Location Details">
+                                                                    @foreach ($locations as $location)
+                                                                        <option value={{ $location->id }}>
+                                                                            {{ $location->name }}
+                                                                            {{ $location->description }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </optgroup>
+                                                            </select>
                                                         </div>
                                                     </div>
 
@@ -152,7 +163,6 @@
                                                                 class="form-control round" name="shipment_arrival_date"
                                                                 required value="{{ old('shipment_arrival_date') }}">
                                                         </div>
-
                                                         <div class="form-group">
                                                             <label for="shipment_arrival_time">Shipment Arrival Time</label>
                                                             <input type="time" id="shipment_arrival_time"
@@ -261,17 +271,19 @@
                                                                 class="form-control round" name="delivery_note_number"
                                                                 required value="{{ old('delivery_note_number') }}">
                                                         </div>
-                                                        <img style='height: 80px; width: 100px; border: 1px solid #000;' id="image_preview" src="https://via.placeholder.com/100?text=image" alt=""/>
+                                                        <img style='height: 80px; width: 100px; border: 1px solid #000;'
+                                                            id="image_preview"
+                                                            src="https://via.placeholder.com/100?text=image" alt="" />
 
-                                                       {{--   <div class="form-group  ">
+                                                        {{-- <div class="form-group  ">
                                                             <label for="delivery_note_image">Delivery Note Image</label>
                                                             <input type="file" id="delivery_note_image"
                                                                 name="delivery_note_image" class="" accept="image/*">
-                                                        </div>  --}}
+                                                        </div> --}}
 
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" name="delivery_note_image"
-                                                                id="delivery_note_image">
+                                                            <input type="file" class="custom-file-input"
+                                                                name="delivery_note_image" id="delivery_note_image">
                                                             <label class="custom-file-label" for="delivery_note_image"
                                                                 aria-describedby="delivery_note_image">Choose file</label>
                                                         </div>
@@ -325,28 +337,28 @@
             </div>
         </div>
     </div>
-</div>
-<script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>
+    </div>
+    <script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>
 
-<script>
-    $(function () {
+    <script>
+        $(function() {
 
-        $("#delivery_note_image").on('change', function () {
-            preview_image();
-        });
+            $("#delivery_note_image").on('change', function() {
+                preview_image();
+            });
 
-        function preview_image() {
+            function preview_image() {
 
 
-            var reader = new FileReader();
-            reader.onload = function () {
+                var reader = new FileReader();
+                reader.onload = function() {
 
-                var output = document.getElementById('image_preview');
-                output.src = reader.result;
+                    var output = document.getElementById('image_preview');
+                    output.src = reader.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
             }
-            reader.readAsDataURL(event.target.files[0]);
-        }
 
-    });
-</script>
+        });
+    </script>
 @endsection
