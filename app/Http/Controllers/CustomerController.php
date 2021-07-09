@@ -76,17 +76,33 @@ class CustomerController extends Controller
             $customer->location_description = $request->input('location_description');
 
             if ($customer->save()) {
-                return redirect()->route('customer.index')
-                    ->with('success', 'Customer added successfully!');
-            } else {
+
+                $notification = array(
+                    'message' => 'Customer added successfully!',
+                    'alert-type' => 'success'
+                );
 
                 return redirect()->route('customer.index')
-                    ->with('failure', 'Customer not added!');
+                    ->with($notification );
+            } else {
+
+                $notification = array(
+                    'message' => 'OOPS an Error Occured. Try Again',
+                    'alert-type' => 'error'
+                );
+
+                return redirect()->route('customer.index')
+                    ->with($notification );
             }
         } else {
 
+            $notification = array(
+                'message' => 'User Already Exists!',
+                'alert-type' => 'error'
+            );
+
             return redirect()->route('customer.index')
-                ->with('failure', 'User Already Exists!');
+                ->with($notification );
         }
     }
 
@@ -135,12 +151,23 @@ class CustomerController extends Controller
         $customer->fill($data);
 
         if ($customer->save()) {
+
+            $notification = array(
+                'message' => 'Customer Updated successfully!',
+                'alert-type' => 'success'
+            );
+
             return redirect()->route('customer.index')
-                ->with('success', 'Customer Updated successfully!');
+                ->with($notification);
         } else {
 
+            $notification = array(
+                'message' => 'OOPS an Error Occured!',
+                'alert-type' => 'error'
+            );
+
             return redirect()->back()
-                ->with('failure', 'OOPS an Error Occured!');
+                ->with($notification );
         }
     }
 
@@ -155,7 +182,12 @@ class CustomerController extends Controller
         //
         $customer->destroy($id);
 
+        $notification = array(
+            'message' => 'customer removed successfully!',
+            'alert-type' => 'warning'
+        );
+
         return redirect()->route('customer.index')
-            ->with('success', 'customer removed successfully!');
+            ->with($notification);
     }
 }

@@ -52,12 +52,23 @@ class TruckController extends Controller
         $truck->load_capacity = $request->input('load_capacity');
         $truck->cargo_bed_dimensions = $request->input('cargo_bed_dimensions');
         if ($truck->save()) {
-            return redirect()->route('truck.index')
-                ->with('success', 'Truck added successfully!');
-        } else {
+
+            $notification = array(
+                'message' => 'Truck Created successfully!',
+                'alert-type' => 'success'
+            );
 
             return redirect()->route('truck.index')
-                ->with('failure', 'Truck not added!');
+                ->with($notification);
+        } else {
+
+            $notification = array(
+                'message' => 'An Error Occured. Try again',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->route('truck.index')
+                ->with($notification);
         }
     }
 
@@ -101,12 +112,23 @@ class TruckController extends Controller
         $truck->fill($data);
 
         if ($truck->save()) {
+
+            $notification = array(
+                'message' => 'Truck successfully!',
+                'alert-type' => 'success'
+            );
+
             return redirect()->route('truck.index')
-            ->with('success', 'Truck Updated successfully!');
+            ->with($notification);
         }else {
 
+            $notification = array(
+                'message' => 'An Error Occured. Try again',
+                'alert-type' => 'error'
+            );
+
             return redirect()->back()
-                ->with('failure', 'Truck not added!');
+                ->with($notification);
         }
 
     }
@@ -121,7 +143,12 @@ class TruckController extends Controller
     {
         $truck->destroy($id);
 
+        $notification = array(
+            'message' => 'Truck removed successfully!',
+            'alert-type' => 'warning'
+        );
+
         return redirect()->back()
-            ->with('success', 'Truck removed successfully!');
+            ->with($notification);
     }
 }

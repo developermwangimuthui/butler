@@ -5,17 +5,6 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    @if (session('success'))
-
-                    <div class="alert alert-success bg-success alert-icon-left alert-arrow-left alert-dismissible" role="alert">
-                            <span class="alert-icon"><i class="la la-thumbs-o-up"></i></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                           <p>{{session('success') }}</p>
-                    </div>
-                    @endif
-
                     <h3 class="content-header-title">Customers</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
@@ -240,4 +229,35 @@
 
 
 
+@endsection
+
+@section('scripts')
+    <script>
+        @if(Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}";
+            switch(type){
+                case 'info':
+                    toastr.info("{{ Session::get('message') }}", 'INFO', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+                    break;
+
+                case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    toastr.warning("{{ Session::get('message') }}", 'WARNING', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+                    
+                    break;
+
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}", 'SUCCESS', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+                    break;
+
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}", 'OOPS!', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+                    break;
+            }
+        @endif 
+    </script>
 @endsection

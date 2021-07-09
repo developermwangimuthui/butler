@@ -119,13 +119,24 @@ class ShipmentController extends Controller
         $shipment->fill($data);
 
         if ($shipment->save()) {
+
+            $notification = array(
+                'message' => 'Shipment Created Successfully',
+                'alert-type' => 'success'
+            );
+
             return redirect()->route('shipment.index')
-                ->with('success', 'Shipment added successfully!');
+                ->with($notification);
         } else {
+
+            $notification = array(
+                'message' => 'An Error Occured. Try again',
+                'alert-type' => 'error'
+            );
 
             return redirect()->back()
                 ->withInput()
-                ->with('failure', 'Shipment not added!');
+                ->with($notification);
         }
     }
 
@@ -215,13 +226,24 @@ class ShipmentController extends Controller
         $shipment->fill($data);
 
         if ($shipment->save()) {
+
+            $notification = array(
+                'message' => 'Shipment Updated Successfully',
+                'alert-type' => 'success'
+            );
+
             return redirect()->route('shipment.index')
-                ->with('success', 'Shipment Updated successfully!');
+                ->with($notification);
         } else {
+
+            $notification = array(
+                'message' => 'An Error Occured. Try again',
+                'alert-type' => 'error'
+            );
 
             return redirect()->back()
                 ->withInput()
-                ->with('failure', 'OOPS! an Error occurred');
+                ->with($notification);
         }
     }
 
@@ -236,7 +258,12 @@ class ShipmentController extends Controller
         //
         $shipment->destroy($id);
 
+        $notification = array(
+            'message' => 'An Error Occured. Try again',
+            'alert-type' => 'warning'
+        );
+
         return redirect()->back()
-            ->with('success', 'shipment removed successfully!');
+            ->with($notification);
     }
 }

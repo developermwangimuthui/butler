@@ -94,7 +94,7 @@
                                                                         <option value={{ $truck->id }}>
                                                                             {{ $truck->registration }}
                                                                             {{ $truck->load_capacity }}
-                                                                            {{ $truck->truck_type }}</option>
+                                                                            {{ $truck->truck_type->type }}</option>
                                                                     @endforeach
                                                                 </optgroup>
                                                             </select>

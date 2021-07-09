@@ -46,7 +46,12 @@ class TruckTypeController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Truck type added successfully');
+        $notification = array(
+            'message' => 'Truck Type(s) Updated successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with( $notification );
     }
 
     /**
@@ -87,11 +92,23 @@ class TruckTypeController extends Controller
         $type->fill($data);
 
         if ($type->save()) {
+
+            $notification = array(
+                'message' => 'Truck Type Updated successfully!',
+                'alert-type' => 'success'
+            );
+
             return redirect()->route('truck.index')
-            ->with('success', 'Truck Updated successfully!');
+            ->with( $notification);
         }else {
+
+            $notification = array(
+                'message' => 'An Error Occured. Try again',
+                'alert-type' => 'Error'
+            );
+
             return redirect()->back()
-                ->with('failure', 'Truck not Updated!');
+                ->with( $notification );
         }
     }
 
@@ -106,7 +123,12 @@ class TruckTypeController extends Controller
         //
         $truck_type->destroy($id);
 
+        $notification = array(
+            'message' => 'Truck Removed Successfully',
+            'alert-type' => 'warning'
+        );
+
         return redirect()->back()
-            ->with('success', 'Truck Type removed successfully!');
+            ->with( $notification );
     }
 }

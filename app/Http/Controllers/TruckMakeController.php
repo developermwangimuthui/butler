@@ -46,7 +46,12 @@ class TruckMakeController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Truck make added successfully');
+        $notification = array(
+            'message' => 'Truck Make(s) created successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
 
     }
 
@@ -88,12 +93,25 @@ class TruckMakeController extends Controller
 
         $make->fill($data);
 
+
         if ($make->save()) {
+
+            $notification = array(
+                'message' => 'Truck make Updated successfully!',
+                'alert-type' => 'success'
+            );
+
             return redirect()->route('truck.index')
-            ->with('success', 'Truck make Updated successfully!');
+            ->with($notification);
         }else {
+
+            $notification = array(
+                'message' => 'An Error Occured. Try again',
+                'alert-type' => 'error'
+            );
+
             return redirect()->back()
-                ->with('failure', 'Truck make not Updated!');
+                ->with($notification);
         }
     }
 
@@ -107,8 +125,12 @@ class TruckMakeController extends Controller
     {
         //
         $truck_make->destroy($id);
-        dd($id);
+        $notification = array(
+            'message' => 'Truck Make removed successfully!',
+            'alert-type' => 'warning'
+        );
+
         return redirect()->back()
-            ->with('success', 'Truck Make removed successfully!');
+            ->with($notification);
     }
 }

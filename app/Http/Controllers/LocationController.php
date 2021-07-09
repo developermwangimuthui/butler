@@ -48,13 +48,25 @@ class LocationController extends Controller
         $location = new Location();
         $location->name = $request->input('name');
         $location->description = $request->input('description');
+
         if ($location->save()) {
+
+            $notification = array(
+                'message' => 'Location added successfully!',
+                'alert-type' => 'success'
+            );
+
             return redirect()->route('location.index')
-            ->with('success','Location added successfully!');
+            ->with($notification);
         } else {
 
+            $notification = array(
+                'message' =>'Location not added!' ,
+                'alert-type' => 'error'
+            );
+
             return redirect()->route('loaction.index')
-            ->with('failure','Location not added!');
+            ->with($notification);
 
         }
 
@@ -99,12 +111,23 @@ class LocationController extends Controller
         $location->fill($data);
 
         if ($location->save()) {
-            return redirect()->back()
-                ->with('success', 'location Updated successfully!');
-        } else {
+
+            $notification = array(
+                'message' => 'location Updated successfully!',
+                'alert-type' => 'success'
+            );
 
             return redirect()->back()
-                ->with('failure', 'OOPS an Error Occured!');
+                ->with($notification );
+        } else {
+
+            $notification = array(
+                'message' => 'OOPS an Error Occured!',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()
+                ->with($notification);
         }
 
     }
@@ -120,7 +143,12 @@ class LocationController extends Controller
         //
         $location->destroy($id);
 
+        $notification = array(
+            'message' => 'Location removed successfully!',
+            'alert-type' => 'warning'
+        );
+
         return redirect()->back()
-        ->with('success','Location removed successfully!');
+        ->with($notification);
     }
 }

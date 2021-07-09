@@ -5,18 +5,6 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    @if (session('success'))
-
-                        <div class="alert alert-success bg-success alert-icon-left alert-arrow-left alert-dismissible"
-                            role="alert">
-                            <span class="alert-icon"><i class="la la-thumbs-o-up"></i></span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <p>{{ session('success') }}</p>
-                        </div>
-                    @endif
-
                     <h3 class="content-header-title">Trucks</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
@@ -73,7 +61,8 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
 
-                                        <table class="table table-striped table-bordered file-export responsive dataex-res-configuration">
+                                        <table
+                                            class="table table-striped table-bordered file-export responsive dataex-res-configuration">
                                             <thead>
                                                 <tr>
                                                     <th>Truck Type</th>
@@ -111,8 +100,9 @@
                                                                 </i>
                                                             </span>
                                                             &nbsp;&nbsp;
-                                                            <a href="{{ route('truck.delete', $truck->id) }}" class="edit"
-                                                                style="color:#967ADC"><i class="ft-trash-2"></i></a>
+                                                            <a href="{{ route('truck.delete', $truck->id) }}"
+                                                                class="edit" style="color:#967ADC"><i
+                                                                    class="ft-trash-2"></i></a>
                                                         </td>
                                                     </tr>
 
@@ -160,6 +150,10 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
+                                        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                                            <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addTruckType"><i
+                                                    class="ft-plus icon-left"></i> Add Truck Type</button>        
+                                        </div>    
 
                                         <table class="table table-striped table-bordered file-export">
                                             <thead>
@@ -228,6 +222,11 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
+
+                                        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                                            <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addMake"><i
+                                                    class="ft-plus icon-left"></i> add Truck Make</button>                    
+                                        </div>
 
                                         <table class="table table-striped table-bordered file-export">
                                             <thead>
@@ -445,6 +444,53 @@
 
             $('#truck_info').modal('show');
         });
+       /*  */
+      
+       
+        // Position Bottom Right
+        function showToastr(msg) {
+            toastr.error('I do not think that word means what you think it means.', 'Bottom Right!', {
+                positionClass: 'toast-bottom-right',
+                containerId: 'toast-bottom-right',
+                "progressBar": true
+            });
+
+        }
+         $('#position-bottom-right').on('click', function () {
+             toastr.error('I do not think that word means what you think it means.', 'Bottom Right!', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+         });
     </script>
 
+@endsection
+
+@section('scripts')
+    <script>
+        @if(Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}";
+            switch(type){
+                case 'info':
+                    toastr.info("{{ Session::get('message') }}", 'INFO', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+                    break;
+
+                case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    toastr.warning("{{ Session::get('message') }}", 'WARNING', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+                    
+                    break;
+
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}", 'SUCCESS', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+                    break;
+
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}", 'OOPS!', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
+
+                    break;
+            }
+        @endif 
+    </script>
 @endsection

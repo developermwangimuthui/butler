@@ -58,10 +58,7 @@ $(document).ready(function () {
     toastr.info('I do not think that word means what you think it means.', 'Bottom Center!', { positionClass: 'toast-bottom-center', containerId: 'toast-bottom-center' });
   });
 
-  // Position Bottom Right
-  $('#position-bottom-right').on('click', function () {
-    toastr.info('I do not think that word means what you think it means.', 'Bottom Right!', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right' });
-  });
+
 
   // Position Bottom Full Width
   $('#position-bottom-full').on('click', function () {

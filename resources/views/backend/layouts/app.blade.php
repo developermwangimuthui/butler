@@ -25,6 +25,8 @@
     <link rel="stylesheet" type="text/css" href="/backend/app-assets/vendors/css/forms/selects/select2.min.css">
 
     <link rel="stylesheet" type="text/css" href="/backend/app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="/backend/app-assets/vendors/css/extensions/toastr.css">
+
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -40,6 +42,8 @@
     <link rel="stylesheet" type="text/css" href="/backend/app-assets/css/pages/hospital.css">
     <link rel="stylesheet" type="text/css" href="/backend/app-assets/css/plugins/forms/wizard.css">
     <link rel="stylesheet" type="text/css" href="/backend/app-assets/css/plugins/pickers/daterange/daterange.css">
+    <link rel="stylesheet" type="text/css" href="/backend/app-assets/css/plugins/extensions/toastr.css">
+
 
     <!-- END: Page CSS-->
 
@@ -102,6 +106,8 @@
     <script src="/backend/app-assets/vendors/js/tables/buttons.print.min.js"></script>
 
     <script src="/backend/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+    <script src="/backend/app-assets/vendors/js/extensions/toastr.min.js"></script>
+
 
 
     <!-- END: Page Vendor JS-->
@@ -117,6 +123,8 @@
     <script src="/backend/app-assets/js/scripts/pages/appointment.js"></script>
     <script src="/backend/app-assets/js/scripts/tables/datatables/datatable-advanced.js"></script>
     <script src="/backend/app-assets/js/scripts/forms/form-repeater.js"></script>
+    <script src="/backend/app-assets/js/scripts/extensions/toastr.js"></script>
+
 
 
 
@@ -124,6 +132,7 @@
 
 
     <!-- END: Page JS-->
+    @yield('scripts')
 
 </body>
 <!-- END: Body-->
