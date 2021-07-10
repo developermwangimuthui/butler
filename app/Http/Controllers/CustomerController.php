@@ -177,13 +177,19 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer, $id)
+    public function destroy(Customer $customer, User $user, $id)
     {
         //
+        $findUser = $customer->find($id);
+
+        // dd($user->find($findUser->user->id));
+
+        $user->destroy($findUser->user->id);
+
         $customer->destroy($id);
 
         $notification = array(
-            'message' => 'customer removed successfully!',
+            'message' => 'Customer and User removed successfully!',
             'alert-type' => 'warning'
         );
 
