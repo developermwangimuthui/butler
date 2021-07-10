@@ -242,10 +242,9 @@
                     break;
 
                 case 'warning':
-                    toastr.warning("{{ Session::get('message') }}");
                     toastr.warning("{{ Session::get('message') }}", 'WARNING', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
 
-                    
+
                     break;
 
                 case 'success':
@@ -258,6 +257,6 @@
 
                     break;
             }
-        @endif 
+        @endif
     </script>
 @endsection

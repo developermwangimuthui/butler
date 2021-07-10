@@ -121,6 +121,19 @@ class TruckTypeController extends Controller
     public function destroy(Truck_type $truck_type, $id)
     {
         //
+        $truck = $truck_type->find($id);
+
+        if($truck->trucks->count()){
+
+            $notification = array(
+                'message' => 'Can not Delete Item. Item is in use',
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->back()
+                ->with($notification);
+        }
+
         $truck_type->destroy($id);
 
         $notification = array(

@@ -140,8 +140,8 @@
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
                                         <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
                                             <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addTruckType"><i
-                                                    class="ft-plus icon-left"></i> Add Truck Type</button>        
-                                        </div>    
+                                                    class="ft-plus icon-left"></i> Add Truck Type</button>
+                                        </div>
 
                                         <table class="table table-striped table-bordered file-export">
                                             <thead>
@@ -213,7 +213,7 @@
 
                                         <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
                                             <button class="btn btn-info round  box-shadow-2 px-2 mb-1" id="addMake"><i
-                                                    class="ft-plus icon-left"></i> add Truck Make</button>                    
+                                                    class="ft-plus icon-left"></i> add Truck Make</button>
                                         </div>
 
                                         <table class="table table-striped table-bordered file-export">
@@ -295,7 +295,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="truck_make">Truck Make:</label>
-                                    <select class="select2 form-control block" id="truck_make" name="make_id" required>
+                                    <select class="select2 form-control block" id="truck_make" name="truck_make_id" required>
                                         <option disabled selected>Choose one</option>
                                         <optgroup label="Truck Model">
                                             @foreach ($truck_makes as $truck_make)
@@ -317,7 +317,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="truck_type">Truck Type:</label>
-                                    <select class="select2 form-control block" id="truck_type" name="type_id" required>
+                                    <select class="select2 form-control block" id="truck_type" name="truck_type_id" required>
                                         <option disabled selected>Choose one</option>
                                         <optgroup label="Truck Type">
                                             @foreach ($truck_types as $truck_type)
@@ -433,21 +433,8 @@
             $('#truck_info').modal('show');
         });
        /*  */
-      
-       
-        // Position Bottom Right
-        function showToastr(msg) {
-            toastr.error('I do not think that word means what you think it means.', 'Bottom Right!', {
-                positionClass: 'toast-bottom-right',
-                containerId: 'toast-bottom-right',
-                "progressBar": true
-            });
 
-        }
-         $('#position-bottom-right').on('click', function () {
-             toastr.error('I do not think that word means what you think it means.', 'Bottom Right!', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
 
-         });
     </script>
 
 @endsection
@@ -463,10 +450,9 @@
                     break;
 
                 case 'warning':
-                    toastr.warning("{{ Session::get('message') }}");
                     toastr.warning("{{ Session::get('message') }}", 'WARNING', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
 
-                    
+
                     break;
 
                 case 'success':
@@ -479,6 +465,6 @@
 
                     break;
             }
-        @endif 
+        @endif
     </script>
 @endsection

@@ -18,8 +18,8 @@ class CreateTrucksTable extends Migration
             $table->string('owners_name');
             $table->string('owners_phone');
             $table->string('registration');
-            $table->foreignId('make_id')->constrained('truck_makes');
-            $table->foreignId('type_id')->constrained('truck_makes');
+            $table->foreignId('truck_make_id')->constrained('truck_makes');
+            $table->foreignId('truck_type_id')->constrained('truck_types');
             $table->string('load_capacity');
             $table->string('cargo_bed_dimensions');
             $table->softDeletes();

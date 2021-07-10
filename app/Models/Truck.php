@@ -16,8 +16,8 @@ class Truck extends Model
         'owners_name',
         'owners_phone',
         'registration',
-        'make_id',
-        'type_id',
+        'truck_make_id',
+        'truck_type_id',
         'load_capacity',
         'truck_type',
         'cargo_bed_dimensions',
@@ -35,7 +35,7 @@ class Truck extends Model
      */
     public function truck_make()
     {
-        return $this->belongsTo(Truck_make::class, 'make_id');
+        return $this->belongsTo(Truck_make::class);
     }
 
     /**
@@ -45,6 +45,6 @@ class Truck extends Model
      */
     public function truck_type()
     {
-        return $this->belongsTo(Truck_type::class, 'type_id');
+        return $this->belongsTo(Truck_type::class);
     }
 }

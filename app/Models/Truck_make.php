@@ -21,9 +21,9 @@ class Truck_make extends Model
      */
     public function trucks()
     {
-        return $this->hasMany(Truck::class, 'make_id');
+        return $this->hasMany(Truck::class);
     }
-    
 
-    
+
+
 }

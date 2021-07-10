@@ -124,7 +124,21 @@ class TruckMakeController extends Controller
     public function destroy(Truck_make $truck_make, $id)
     {
         //
+        $truck = $truck_make->find($id);
+
+        if($truck->trucks->count()){
+
+            $notification = array(
+                'message' => 'Can not Delete Item. Item is in use',
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->back()
+                ->with($notification);
+        }
+
         $truck_make->destroy($id);
+
         $notification = array(
             'message' => 'Truck Make removed successfully!',
             'alert-type' => 'warning'

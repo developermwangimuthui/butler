@@ -43,14 +43,11 @@ class TruckController extends Controller
     public function store(Request $request)
     {
 
+        $data = $request->all();
+
         $truck = new Truck();
-        $truck->owners_name = $request->input('owners_name');
-        $truck->owners_phone = $request->input('owners_phone');
-        $truck->registration = $request->input('registration');
-        $truck->make_id = $request->input('make_id');
-        $truck->type_id = $request->input('type_id');
-        $truck->load_capacity = $request->input('load_capacity');
-        $truck->cargo_bed_dimensions = $request->input('cargo_bed_dimensions');
+        $truck -> fill($data);
+
         if ($truck->save()) {
 
             $notification = array(
