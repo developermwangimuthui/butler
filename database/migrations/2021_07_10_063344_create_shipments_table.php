@@ -24,7 +24,7 @@ class CreateShipmentsTable extends Migration
             $table->time('shipment_dispatch_time');
             $table->date('shipment_arrival_date');
             $table->time('shipment_arrival_time');
-            $table->string('delivery_point');
+            $table->json('delivery_points');
             $table->string('cargo_description');
             $table->string('order_delivery_status');
             $table->string('delivery_note_number');

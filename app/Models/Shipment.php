@@ -18,16 +18,7 @@ class Shipment extends Model
         'cargo_description',
         'shipment_dispatch_date',
         'shipment_dispatch_time',
-        'shipment_arrival_date',
-        'shipment_arrival_time',
-        'delivery_point_1',
-        'delivery_point_2',
-        'delivery_point_3',
-        'delivery_point_4',
-        'delivery_point_5',
-        'order_delivery_status',
-        'delivery_note_number',
-        'delivery_note_image',
+        'delivery_points',
         'invoice_date',
         'order_payment_status',
         'transporter_rate_per_trip',
@@ -35,7 +26,7 @@ class Shipment extends Model
     ];
 
     protected $casts = [
-        'delivery_point' => 'array',
+        'delivery_points' => 'array',
     ];
 
     /**

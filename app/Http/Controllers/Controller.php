@@ -21,7 +21,6 @@ class Controller extends BaseController
         $filename = uniqid() . '_' . time() . '.' . $extension;
 
         $file->move("uploads/{$dir}", $filename);
-
         return $filename;
     }
 

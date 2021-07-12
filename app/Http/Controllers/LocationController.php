@@ -143,6 +143,20 @@ class LocationController extends Controller
     public function destroy(Location $location , $id)
     {
         //
+
+        $findShipment = $location->find($id);
+
+        if($findShipment->shipments->count()){
+
+            $notification = array(
+                'message' => 'Can not Delete Item. Location is in use',
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->back()
+                ->with($notification);
+        }
+
         $location->destroy($id);
 
         $notification = array(

@@ -157,7 +157,7 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
+                                                       {{--   <div class="form-group">
                                                             <label for="shipment_arrival_date">Shipment Arrival Date</label>
                                                             <input type="date" id="shipment_arrival_date"
                                                                 class="form-control round" name="shipment_arrival_date"
@@ -168,7 +168,7 @@
                                                             <input type="time" id="shipment_arrival_time"
                                                                 class="form-control round" name="shipment_arrival_time"
                                                                 required value="{{ old('shipment_arrival_time') }}">
-                                                        </div>
+                                                        </div>  --}}
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -176,48 +176,103 @@
                                             <!-- Step 3 -->
                                             <h6>Step 3(Delivery points)</h6>
                                             <fieldset>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="delivery_point_1">Delivery Point 1</label>
-                                                            <input type="text" id="delivery_point_1"
-                                                                class="form-control round" name="delivery_point_1" required
-                                                                value="{{ old('delivery_point_1') }}">
-                                                        </div>
+                                                <div class="repeater-default">
+                                                    <div data-repeater-list="delivery_points">
+                                                        <div data-repeater-item>
+                                                            <div class="card border-success">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-title">Collapse Example</h4>
+                                                                </div>
+                                                                <div class="card-content">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
 
-                                                        <div class="form-group  ">
-                                                            <label for="delivery_point_3">Delivery Point 3</label>
-                                                            <input type="text" id="delivery_point_3"
-                                                                class="form-control round" name="delivery_point_3" required
-                                                                value="{{ old('delivery_point_3') }}">
-                                                        </div>
+                                                                                <div class="form-group mb-1">
+                                                                                    <label for="deliveryPoint">Loading Point:</label>
 
-                                                        <div class="form-group  ">
-                                                            <label for="delivery_point_5">Delivery Point 5</label>
-                                                            <input type="text" id="delivery_point_5"
-                                                                class="form-control round" name="delivery_point_5" required
-                                                                value="{{ old('delivery_point_5') }}">
+                                                                                    <select class="select2 form-control block" id="deliveryPoint"
+                                                                                        name="location_id" required>
+                                                                                        <option disabled selected>Choose one</option>
+                                                                                        <optgroup label="Location Details">
+                                                                                            @foreach ($locations as $location)
+                                                                                                <option value={{ $location->id }}>
+                                                                                                    {{ $location->name }}
+                                                                                                    {{ $location->description }}
+                                                                                                </option>
+                                                                                            @endforeach
+                                                                                        </optgroup>
+                                                                                    </select>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="shipment_arrival_date">Shipment Arrival Date</label>
+                                                                                    <input type="date" id="shipment_arrival_date"
+                                                                                        class="form-control round" name="shipment_arrival_date"
+                                                                                        required value="{{ old('shipment_arrival_date') }}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="shipment_arrival_time">Shipment Arrival Time</label>
+                                                                                    <input type="time" id="shipment_arrival_time"
+                                                                                        class="form-control round" name="shipment_arrival_time"
+                                                                                        required value="{{ old('shipment_arrival_time') }}">
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group  ">
+                                                                                    <label for="order_delivery_status">Order Delivery Status</label>
+
+                                                                                    <select class="select2 form-control block"
+                                                                                        id="order_delivery_status" name="order_delivery_status"
+                                                                                        required value="{{ old('order_delivery_status') }}">
+                                                                                        <option disabled selected>Choose one</option>
+                                                                                        <optgroup label="Order Delivery Status">
+                                                                                            @foreach ($ORDER_DELIVERY_STATUS as $key => $order_delivery_status)
+                                                                                                <option value={{ $key }}>
+                                                                                                    {{ $order_delivery_status }} </option>
+                                                                                            @endforeach
+                                                                                        </optgroup>
+                                                                                    </select>
+                                                                                </div>
+
+                                                                                <div class="form-group  ">
+                                                                                    <label for="delivery_note_number">Delivery Note Number</label>
+                                                                                    <input type="text" id="delivery_note_number"
+                                                                                        class="form-control round" name="delivery_note_number"
+                                                                                        required value="{{ old('delivery_note_number') }}">
+                                                                                </div>
+                                                                                <label class="file center-block">
+                                                                                    <input type="file" id="delivery_note_image"  name="delivery_note_image">
+                                                                                    <span class="file-custom"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer border-0 text-muted">
+                                                                    <div class="form-group col-sm-12 col-md-2 float-right text-center mt-2">
+                                                                        <button type="button" class="btn btn-danger"
+                                                                            data-repeater-delete> <i class="ft-x"></i>
+                                                                            Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group   ">
-                                                            <label for="delivery_point_2">Delivery Point 2</label>
-                                                            <input type="text" id="delivery_point_2"
-                                                                class="form-control round" name="delivery_point_2" required
-                                                                value="{{ old('delivery_point_2') }}">
+                                                    <div class="form-group overflow-hidden">
+                                                        <div class="col-12">
+                                                            <a data-repeater-create class="btn btn-primary">
+                                                                <i class="ft-plus"></i> Add
+                                                            </a>
                                                         </div>
-
-                                                        <div class="form-group  ">
-                                                            <label for="delivery_point_4">Delivery point 4</label>
-                                                            <input type="text" id="delivery_point_4"
-                                                                class="form-control round" name="delivery_point_4" required
-                                                                value="{{ old('delivery_point_4') }}">
-                                                        </div>
-
-
                                                     </div>
                                                 </div>
+
+
                                             </fieldset>
 
                                             <!-- Step 4 -->
@@ -232,7 +287,7 @@
                                                                 value="{{ old('invoice_date') }}">
                                                         </div>
 
-                                                        <div class="form-group  ">
+                                                        {{--  <div class="form-group  ">
                                                             <label for="order_delivery_status">Order Delivery Status</label>
 
                                                             <select class="select2 form-control block"
@@ -246,7 +301,7 @@
                                                                     @endforeach
                                                                 </optgroup>
                                                             </select>
-                                                        </div>
+                                                        </div>  --}}
 
                                                         <div class="form-group  ">
                                                             <label for="order_payment_status">Order payment Status</label>
@@ -265,7 +320,7 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <div class="form-group  ">
+                                                        {{--  <div class="form-group  ">
                                                             <label for="delivery_note_number">Delivery Note Number</label>
                                                             <input type="text" id="delivery_note_number"
                                                                 class="form-control round" name="delivery_note_number"
@@ -275,18 +330,12 @@
                                                             id="image_preview"
                                                             src="https://via.placeholder.com/100?text=image" alt="" />
 
-                                                        {{-- <div class="form-group  ">
-                                                            <label for="delivery_note_image">Delivery Note Image</label>
-                                                            <input type="file" id="delivery_note_image"
-                                                                name="delivery_note_image" class="" accept="image/*">
-                                                        </div> --}}
-
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input"
                                                                 name="delivery_note_image" id="delivery_note_image">
                                                             <label class="custom-file-label" for="delivery_note_image"
                                                                 aria-describedby="delivery_note_image">Choose file</label>
-                                                        </div>
+                                                        </div>  --}}
 
                                                     </div>
                                                 </div>

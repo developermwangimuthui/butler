@@ -136,7 +136,7 @@
                                     <label for="city">City</label>
                                     <input type="text" id="city" class="form-control round" name="city">
                                 </div>
-                               
+
                             </div>
 
                             <div class="col-md-6">
@@ -146,16 +146,16 @@
                                     <input type="text" id="description" class="form-control round"
                                         name="description">
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="town">Town</label>
                                     <input type="text" id="town" class="form-control round" name="town">
                                 </div>
-        
+
                             </div>
                         </div>
 
-                        
+
 
 
                         <div class="form-actions">
@@ -240,10 +240,8 @@
                     break;
 
                 case 'warning':
-                    toastr.warning("{{ Session::get('message') }}");
                     toastr.warning("{{ Session::get('message') }}", 'WARNING', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
 
-                    
                     break;
 
                 case 'success':
@@ -256,6 +254,6 @@
 
                     break;
             }
-        @endif 
+        @endif
     </script>
 @endsection

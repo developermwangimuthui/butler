@@ -8,6 +8,7 @@ use App\Models\Truck;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 
 class ShipmentController extends Controller
@@ -83,7 +84,7 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        /* $this->validate($request, [
             'customer_id' => 'required',
             'truck_id' => 'required',
             'loading_point' => 'required',
@@ -92,11 +93,7 @@ class ShipmentController extends Controller
             'shipment_dispatch_time' => 'required',
             'shipment_arrival_date' => 'required',
             'shipment_arrival_time' => 'required',
-            'delivery_point_1' => 'required',
-            'delivery_point_2' => 'required',
-            'delivery_point_3' => 'required',
-            'delivery_point_4' => 'required',
-            'delivery_point_5' => 'required',
+            'delivery_points' => 'required',
             'order_delivery_status' => 'required',
             'delivery_note_number' => 'required',
             'invoice_date' => 'required',
@@ -104,17 +101,39 @@ class ShipmentController extends Controller
             'transporter_rate_per_trip' => 'required',
             'trip_challenges' => 'required',
 
-        ]);
+        ]); */
+
+
 
         $DIR_DELIVERY_NOTES_IMAGES = "delivery_notes";
 
         $data = $request->all();
 
-        if ($request->hasFile('delivery_note_image')) {
-            $thumb = $request->file('delivery_note_image');
+        // dd($data['delivery_points'][0]['location_id']);
+
+
+        foreach ($data['delivery_points'] as $key => $delivery_point) {
+
+
+            $thumb = $delivery_point['delivery_note_image'];
             $thumb_file = $this->uploadImage($thumb, $DIR_DELIVERY_NOTES_IMAGES);
-            $data['delivery_note_image'] = $thumb_file;
+
+
+
+            $delivery_point['delivery_note_image'] = $thumb_file;
+
+            // dd( $delivery_point['delivery_note_image'] );
+            $flattened = Arr::dot($data);
+
+            Arr::set($flattened, 'delivery_points'.'delivery_note_image', $thumb_file);
+
+
+
+            // dd($delivery_point['delivery_note_image']);
         }
+
+        dd($data);
+
 
         $shipment = new Shipment();
 

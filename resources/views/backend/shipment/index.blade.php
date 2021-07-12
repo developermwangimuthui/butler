@@ -68,17 +68,19 @@
                                                 @foreach ($shipments as $shipment)
                                                     <tr>
                                                         <td>{{ $shipment->customer->user->name }}</td>
-                                                        <td> 
+                                                        <td>
                                                             {{ Carbon\Carbon::parse($shipment->shipment_dispatch_date)->toFormattedDateString() }}
-                                                            
+
                                                         </td>
 
-                                                        <td> 
+                                                        <td>
                                                             {{ Carbon\Carbon::parse($shipment->shipment_dispatch_time)->toTimeString() }}
-                                                            
+
                                                         </td>
                                                         <td> {{ $shipment->truck->owners_name }}</td>
-                                                        <td> {{ $shipment->location->name }}</td>
+                                                        <td>
+                                                            {{ $shipment->location->name }}
+                                                        </td>
                                                         <td> {{ $shipment->cargo_description }}</td>
                                                         <td> {{ $shipment->delivery_note_number }}</td>
                                                         <td>
@@ -136,7 +138,7 @@
                     toastr.warning("{{ Session::get('message') }}");
                     toastr.warning("{{ Session::get('message') }}", 'WARNING', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
 
-                    
+
                     break;
 
                 case 'success':
@@ -149,6 +151,6 @@
 
                     break;
             }
-        @endif 
+        @endif
     </script>
 @endsection
