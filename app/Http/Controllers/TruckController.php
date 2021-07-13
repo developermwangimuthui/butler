@@ -16,7 +16,7 @@ class TruckController extends Controller
      */
     public function index()
     {
-        $trucks = Truck::all();
+        $trucks = Truck::with('truck_type', 'truck_make')->get();
 
         $truck_types = Truck_type::all();
         $truck_makes = Truck_make::all();

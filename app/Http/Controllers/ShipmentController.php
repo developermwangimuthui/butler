@@ -20,7 +20,7 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::all();
+        $shipments = Shipment::with('customer', 'truck', 'location' )->get();
 
         return view('backend.shipment.index', compact('shipments'));
     }
