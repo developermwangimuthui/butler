@@ -70,7 +70,7 @@ class ShipmentController extends Controller
 
 
         $customers = Customer::all();
-        $trucks = Truck::all();
+        $trucks = Truck::with('truck_type', 'truck_make')->get();
         $locations = Location::all();
 
         return view('backend.shipment.create', compact('customers', 'trucks', 'locations','ORDER_DELIVERY_STATUS', 'ORDER_PAYMENT_STATUS', 'TRIP_CHALLENGES'));
@@ -217,7 +217,7 @@ class ShipmentController extends Controller
 
         $shipment = Shipment::find($id);
         $customers = Customer::all();
-        $trucks = Truck::all();
+        $trucks =Truck::with('truck_type', 'truck_make')->get();
         $locations = Location::all();
 
         return view('backend.shipment.edit', compact('customers', 'trucks', 'shipment', 'locations', 'ORDER_DELIVERY_STATUS', 'ORDER_PAYMENT_STATUS', 'TRIP_CHALLENGES'));

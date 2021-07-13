@@ -121,6 +121,13 @@
                                                                 </optgroup>
                                                             </select>
                                                         </div>
+
+                                                        <div class="form-group">
+                                                            <label for="complaintinput2">Shipment Dispatch Date</label>
+                                                            <input type="date" id="complaintinput2"
+                                                                class="form-control round" name="shipment_dispatch_date"
+                                                                required value="{{ old('shipment_dispatch_date') }}">
+                                                        </div>
                                                     </div>
 
                                                     <div class="col-md-6">
@@ -129,22 +136,6 @@
                                                             <input type="text" id="cargo_description"
                                                                 class="form-control round" name="cargo_description" required
                                                                 value="{{ old('cargo_description') }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </fieldset>
-
-                                            <!-- Step 2 -->
-                                            <h6>Step 2(shipment)</h6>
-                                            <fieldset>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="complaintinput2">Shipment Dispatch Date</label>
-                                                            <input type="date" id="complaintinput2"
-                                                                class="form-control round" name="shipment_dispatch_date"
-                                                                required value="{{ old('shipment_dispatch_date') }}">
                                                         </div>
 
                                                         <div class="form-group">
@@ -155,31 +146,17 @@
                                                                 required value="{{ old('shipment_dispatch_time') }}">
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-md-6">
-                                                       {{--   <div class="form-group">
-                                                            <label for="shipment_arrival_date">Shipment Arrival Date</label>
-                                                            <input type="date" id="shipment_arrival_date"
-                                                                class="form-control round" name="shipment_arrival_date"
-                                                                required value="{{ old('shipment_arrival_date') }}">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="shipment_arrival_time">Shipment Arrival Time</label>
-                                                            <input type="time" id="shipment_arrival_time"
-                                                                class="form-control round" name="shipment_arrival_time"
-                                                                required value="{{ old('shipment_arrival_time') }}">
-                                                        </div>  --}}
-                                                    </div>
                                                 </div>
+
                                             </fieldset>
 
                                             <!-- Step 3 -->
-                                            <h6>Step 3(Delivery points)</h6>
+                                            <h6>Step 2 (Delivery points)</h6>
                                             <fieldset>
                                                 <div class="repeater-default">
                                                     <div data-repeater-list="delivery_points">
                                                         <div data-repeater-item>
-                                                            <div class="card border-success">
+                                                            <div class="card border-secondary">
                                                                 <div class="card-header">
                                                                     <h4 class="card-title">Collapse Example</h4>
                                                                 </div>
@@ -287,22 +264,6 @@
                                                                 value="{{ old('invoice_date') }}">
                                                         </div>
 
-                                                        {{--  <div class="form-group  ">
-                                                            <label for="order_delivery_status">Order Delivery Status</label>
-
-                                                            <select class="select2 form-control block"
-                                                                id="order_delivery_status" name="order_delivery_status"
-                                                                required value="{{ old('order_delivery_status') }}">
-                                                                <option disabled selected>Choose one</option>
-                                                                <optgroup label="Order Delivery Status">
-                                                                    @foreach ($ORDER_DELIVERY_STATUS as $key => $order_delivery_status)
-                                                                        <option value={{ $key }}>
-                                                                            {{ $order_delivery_status }} </option>
-                                                                    @endforeach
-                                                                </optgroup>
-                                                            </select>
-                                                        </div>  --}}
-
                                                         <div class="form-group  ">
                                                             <label for="order_payment_status">Order payment Status</label>
                                                             <select class="select2 form-control block"
@@ -320,34 +281,6 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        {{--  <div class="form-group  ">
-                                                            <label for="delivery_note_number">Delivery Note Number</label>
-                                                            <input type="text" id="delivery_note_number"
-                                                                class="form-control round" name="delivery_note_number"
-                                                                required value="{{ old('delivery_note_number') }}">
-                                                        </div>
-                                                        <img style='height: 80px; width: 100px; border: 1px solid #000;'
-                                                            id="image_preview"
-                                                            src="https://via.placeholder.com/100?text=image" alt="" />
-
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input"
-                                                                name="delivery_note_image" id="delivery_note_image">
-                                                            <label class="custom-file-label" for="delivery_note_image"
-                                                                aria-describedby="delivery_note_image">Choose file</label>
-                                                        </div>  --}}
-
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-
-                                            <!-- Step 5 -->
-                                            <h6>Transporter Details</h6>
-                                            <fieldset>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-
                                                         <div class="form-group  ">
                                                             <label for="transporter_rate_per_trip">Transporter Rate Per
                                                                 Trip</label>
@@ -374,6 +307,8 @@
                                                     </div>
                                                 </div>
                                             </fieldset>
+
+
                                         </form>
                                     </div>
                                 </div>
