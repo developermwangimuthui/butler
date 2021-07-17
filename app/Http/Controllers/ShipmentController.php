@@ -10,6 +10,7 @@ use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ShipmentController extends Controller
 {
@@ -217,18 +218,30 @@ class ShipmentController extends Controller
         $DIR_DELIVERY_NOTES_IMAGES = "delivery_notes";
 
         $data = $request->all();
-        dd($data);
-        if ($request->hasFile('delivery_note_image')) {
-            $thumb = $request->file('delivery_note_image');
-            $thumb_file = $this->uploadImage($thumb, $DIR_DELIVERY_NOTES_IMAGES);
-            $data['delivery_note_image'] = $thumb_file;
+
+        // dd(count($data['delivery_points']));
+
+        for ($i = 0; $i < count($data['delivery_points']); $i++) {
+
+            if( ($data['delivery_points'][$i]['delivery_note_image_prev'] == null ) ) {
+
+                $thumb = $data['delivery_points'][$i]['delivery_note_image'];
+                $thumb_file = $this->uploadImage($thumb, $DIR_DELIVERY_NOTES_IMAGES);
+    
+                $data['delivery_points'][$i]['delivery_note_image']= $thumb_file;
+                $data['delivery_points'][$i]['delivery_note_image_prev']= $thumb_file;
+
+            } elseif( ($data['delivery_points'][$i]['delivery_note_image_prev'] != null )) {
+                $data['delivery_points'][$i]['delivery_note_image'] = $data['delivery_points'][$i]['delivery_note_image_prev'];
+            }          
+
         }
 
         $shipment = Shipment::find($data['id']);
 
         $shipment->fill($data);
 
-        if ($shipment->save()) {
+        if ($shipment->update()) {
 
             $notification = array(
                 'message' => 'Shipment Updated Successfully',
@@ -261,9 +274,11 @@ class ShipmentController extends Controller
         //
         $shipment->destroy($id);
 
+        // Storage::delete(['file.jpg', 'file2.jpg']);
+
         $notification = array(
-            'message' => 'An Error Occured. Try again',
-            'alert-type' => 'warning'
+            'message' => 'Deleted succesfully',
+            'alert-type' => 'success'
         );
 
         return redirect()->back()

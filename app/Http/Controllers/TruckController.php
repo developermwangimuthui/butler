@@ -138,6 +138,20 @@ class TruckController extends Controller
      */
     public function destroy(Truck $truck, $id)
     {
+
+        $truck = $truck->find($id);
+
+        if($truck->shipments->count()){
+
+            $notification = array(
+                'message' => 'Can not Delete Item. Item is in use',
+                'alert-type' => 'warning'
+            );
+
+            return redirect()->back()
+                ->with($notification);
+        }
+
         $truck->destroy($id);
 
         $notification = array(

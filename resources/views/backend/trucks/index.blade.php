@@ -79,7 +79,7 @@
                                                                     data-id="{{ $truck->id }}"
                                                                     data-truck_type="{{ $truck->type_id }}"
                                                                     data-registration=" {{ $truck->registration }}"
-                                                                    data-model=" {{ $truck->make_id }}"
+                                                                    data-truck_make=" {{ $truck->truck_make_id }}"
                                                                     data-load_capacity="{{ $truck->load_capacity }}"
                                                                     data-cargo_bed_dimensions="{{ $truck->cargo_bed_dimensions }}"
                                                                     data-owners_name="{{ $truck->owners_name }}"
@@ -409,7 +409,7 @@
 
             let id = $(this).attr('data-id'),
                 registration = $(this).attr('data-registration'),
-                model = $(this).attr('data-model'),
+                truck_make = $(this).attr('data-truck_make'),
                 load_capacity = $(this).attr('data-load_capacity'),
                 truck_type = $(this).attr('data-truck_type'),
                 cargo_bed_dimensions = $(this).attr('data-cargo_bed_dimensions');
@@ -422,13 +422,20 @@
 
             $('#id').val(id);
             $('#registration').val(registration);
-            $('#model').val(model);
             $('#load_capacity').val(load_capacity);
             $('#truck_type').val(truck_type);
             $('#cargo_bed_dimensions').val(cargo_bed_dimensions);
             $('#owners_name').val(owners_name);
             $('#owners_phone').val(owners_phone);
 
+            console.log(`${truck_make}`);
+
+            $('select[name=truck_make_id]').selected('val', truck_make);
+
+            // $('select[name=truck_make_id] option[value="`${truck_make}`"]').prop('selected', true);
+
+
+            $('.form').find('select[name=truck_make_id]')
 
             $('#truck_info').modal('show');
         });

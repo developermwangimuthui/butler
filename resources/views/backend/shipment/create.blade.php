@@ -379,7 +379,7 @@
             });
 
 
-            if ($('.repeater-default').length) {
+          /*   if ($('.repeater-default').length) {
                 var reportRepeater = $('.repeater-default').repeater({
                     defaultValues: {
                         'textarea-input': 'foo',
@@ -401,7 +401,7 @@
                     }
 
                 });
-            }
+            } */
 
         });
     </script>

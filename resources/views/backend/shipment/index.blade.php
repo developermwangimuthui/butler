@@ -60,7 +60,6 @@
                                                     <th>Truck Details </th>
                                                     <th>Loading Point</th>
                                                     <th>Cargo Description</th>
-                                                    <th>Delivery Note Number</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -82,7 +81,6 @@
                                                             {{ $shipment->location->name }}
                                                         </td>
                                                         <td> {{ $shipment->cargo_description }}</td>
-                                                        <td> {{ $shipment->delivery_note_number }}</td>
                                                         <td>
                                                             <span><a class="ft-edit-1" href="{{route('shipment.edit',$shipment->id)}}" title="edit"></a></span>
                                                             &nbsp;&nbsp;
@@ -102,7 +100,6 @@
                                                     <th>Truck Details </th>
                                                     <th>Loading Point</th>
                                                     <th>Cargo Description</th>
-                                                    <th>Delivery Note Number</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </tfoot>
@@ -135,9 +132,7 @@
                     break;
 
                 case 'warning':
-                    toastr.warning("{{ Session::get('message') }}");
                     toastr.warning("{{ Session::get('message') }}", 'WARNING', { positionClass: 'toast-bottom-right', containerId: 'toast-bottom-right', "progressBar": true });
-
 
                     break;
 
