@@ -10,6 +10,9 @@ use App\Http\Controllers\TruckController;
 use App\Http\Controllers\TruckMakeController;
 use App\Http\Controllers\TruckTypeController;
 
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +26,14 @@ use App\Http\Controllers\TruckTypeController;
 
 
 Auth::routes();
+
+//...............................Spatie Roles and Permissions Routes.....................//
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
+});
+
 //...............................FrontEnd Routes.....................//
 Route::get('/', [FrontEndController::class, 'index'])->name('index');
 Route::get('/about', [FrontEndController::class, 'about'])->name('about');
