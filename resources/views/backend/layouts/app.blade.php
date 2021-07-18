@@ -91,6 +91,7 @@
 
     <script src="/backend/app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
     <script src="/backend/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="/backend/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
     <script src="/backend/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
 
 

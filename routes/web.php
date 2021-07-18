@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TruckController;
 use App\Http\Controllers\TruckMakeController;
@@ -25,7 +26,11 @@ use App\Http\Controllers\UserController;
 */
 
 
-Auth::routes();
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+  ]);
 
 //...............................Spatie Roles and Permissions Routes.....................//
 Route::group(['middleware' => ['auth']], function() {
@@ -99,6 +104,11 @@ Route::get('/shipment/edit/{id}', [ShipmentController::class, 'edit'])->name('sh
 Route::get('/shipment/show/{id}', [ShipmentController::class, 'show'])->name('shipment.show');
 Route::put('/shipment/update', [ShipmentController::class, 'update'])->name('shipment.update');
 Route::get('/shipment/delete/{id}', [ShipmentController::class, 'destroy'])->name('shipment.delete');
+
+//..............................Reports......................................//
+
+Route::get('/report/index', [ReportController::class, 'index'])->name('report.index');
+Route::get('/report/data', [ReportController::class, 'get_report_data']);
 
 
 Route::get('clear_cache', function () {

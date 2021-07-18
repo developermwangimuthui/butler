@@ -14,14 +14,14 @@
             </li>
             <li class=" nav-item "><a href="full-calender-basic.html"><i class="material-icons">done</i><span class="menu-title" data-i18n="Calendar">Driver Assesments</span></a>
             </li>
-            <li class=" nav-item "><a href="full-calender-basic.html"><i class="material-icons">playlist_add_check</i><span class="menu-title" data-i18n="Calendar">Reports</span></a>
+            <li class=" nav-item {{Request::routeIs('report.index') ? 'active' : ''}}"><a href="{{route('report.index')}}"><i class="material-icons">playlist_add_check</i><span class="menu-title" data-i18n="Calendar">Reports</span></a>
             </li>
             @can('user-create')
             <li><a class="menu-item" href="#"><i class="material-icons">people_outline</i><span data-i18n="Users">User Management</span></a>
                 <ul class="menu-content">
                     <li class="{{Request::routeIs('users.index') ? 'active' : ''}}"><a class="menu-item " href="{{route('users.index')}}"><i class="material-icons"></i><span data-i18n="User Summary">User Summary</span></a>
                     </li>
-                    <li class="{{Request::routeIs('roles.index') ? 'active' : ''}}"><a class="menu-item" href="{{route('roles.index')}}"><i class="material-icons"></i><span data-i18n="Roles">Roles Task</span></a>
+                    <li class="{{Request::routeIs('roles.index') ? 'active' : ''}}"><a class="menu-item" href="{{route('roles.index')}}"><i class="material-icons"></i><span data-i18n="Roles">Roles</span></a>
                     </li>
                 </ul>
             </li>

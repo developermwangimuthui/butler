@@ -7,6 +7,8 @@
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
+// const { ajax } = require("jquery");
+
 // Combo bar line chart
 // ------------------------------
 $(window).on("load", function(){
@@ -52,55 +54,79 @@ $(window).on("load", function(){
         }
     };
 
+       $.ajax({
+        type: "GET",
+        url: "/report/data",
+        success: function (data) {
+        //  console.log(data);
 
-    // Chart Data
-    var chartData = {
-        labels: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
-        datasets: [{
-            type: 'line',
-            label: "On-Time No Damage",
-            data: [40, 60, 80, 60, 75, 60, 70],
-            borderColor: "rgb(30,159,242)",
-            backgroundColor: "transparent",
-            borderWidth: 2,
-            pointBorderColor: "#1e9ff2",
-            pointBackgroundColor: "#FFF",
-            pointBorderWidth: 2,
-            pointHoverBorderWidth: 2,
-            pointRadius: 4,
-        },{
-            type: 'bar',
-            label: "On-Time In-Transit Damages",
-            data: [70, 75, 90, 60, 80, 75, 65],
-            backgroundColor: "#00A5A8",
-            borderColor: "transparent",
-            borderWidth: 2
-        }, {
-            type: 'bar',
-            label: "Late No Damage",
-            data: [60, 65, 80, 62, 90, 80, 70],
-            backgroundColor: "#FF4081",
-            borderColor: "transparent",
-            borderWidth: 2
-        }, {
-            type: 'bar',
-            label: "Late In-Transit Damages",
-            data: [42, 45, 65, 40, 42, 63, 35],
-            backgroundColor: "#626e82",
-            borderColor: "transparent",
-            borderWidth: 2
-        }]
-    };
+            // Chart Data
+            var chartData = {
+                labels: data.dates,
+                datasets: [
+                    {
+                    type: 'line',
+                    label: "On-Time in-Full No Damage",
+                    data: data.Status0,
+                    borderColor: "rgb(30,159,242)",
+                    backgroundColor: "transparent",
+                    borderWidth: 2,
+                    pointBorderColor: "#1e9ff2",
+                    pointBackgroundColor: "#FFF",
+                    pointBorderWidth: 2,
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 4,
+                },{
+                    type: 'bar',
+                    label: "On-Time In-Transit Damages",
+                    data: data.Status1,
+                    backgroundColor: "#00A5A8",
+                    borderColor: "transparent",
+                    borderWidth: 2
+                }, {
+                    type: 'bar',
+                    label: "On Time, in-Transit-Losses",
+                    data: data.Status2,
+                    backgroundColor: "#FF4081",
+                    borderColor: "transparent",
+                    borderWidth: 2
+                }, {
+                    type: 'bar',
+                    label: "Late,in-Full, No Damage",
+                    data: data.Status3,
+                    backgroundColor: "#626e82",
+                    borderColor: "transparent",
+                    borderWidth: 2
+                }, {
+                    type: 'bar',
+                    label: "Late, in-Full, on-Transit-Damages",
+                    data: data.Status4,
+                    backgroundColor: "#626e82",
+                    borderColor: "transparent",
+                    borderWidth: 2
+                }, {
+                    type: 'bar',
+                    label: "Late, in-Transit-Losses",
+                    data: data.Status5,
+                    backgroundColor: "#626e82",
+                    borderColor: "transparent",
+                    borderWidth: 2
+                }
+            ]
+            };
 
-    var config = {
-        type: 'bar',
+            var config = {
+                type: 'bar',
 
-        // Chart Options
-        options : chartOptions,
+                // Chart Options
+                options : chartOptions,
 
-        data : chartData
-    };
+                data : chartData
+            };
 
-    // Create the chart
-    var lineChart = new Chart(ctx, config);
+            // Create the chart
+            var lineChart = new Chart(ctx, config);
+        }
+      });
+
 });

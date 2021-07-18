@@ -108,10 +108,14 @@ class ShipmentController extends Controller
 
         for ($i = 0; $i < count($data['delivery_points']); $i++) {
 
+
             $thumb = $data['delivery_points'][$i]['delivery_note_image'];
             $thumb_file = $this->uploadImage($thumb, $DIR_DELIVERY_NOTES_IMAGES);
 
             $data['delivery_points'][$i]['delivery_note_image']= $thumb_file;
+
+
+            
 
         }
 

@@ -157,6 +157,10 @@
                                                     <div data-repeater-list="delivery_points">
                                                         <div data-repeater-item>
                                                             <div class="card border-secondary">
+                                                                @php
+                                                                    $count=0;
+                                                                    $count++;
+                                                                @endphp
                                                                 <div class="card-header">
                                                                     <h4 class="card-title">Collapse Example</h4>
                                                                 </div>
@@ -171,7 +175,7 @@
 
                                                                                     <select
                                                                                         class="select2 form-control block"
-                                                                                        id="deliveryPoint"
+                                                                                        id="deliveryPoint{{$count}}"
                                                                                         name="location_id" required>
                                                                                         <option disabled selected>Choose one
                                                                                         </option>
@@ -272,7 +276,7 @@
 
                                                     <div class="form-group overflow-hidden">
                                                         <div class="col-12">
-                                                            <a data-repeater-create class="btn btn-primary">
+                                                            <a data-repeater-create class="btn btn-primary countme">
                                                                 <i class="ft-plus"></i> Add
                                                             </a>
                                                         </div>
@@ -282,8 +286,8 @@
 
                                             </fieldset>
 
-                                            <!-- Step 4 -->
-                                            <h6>Step 4 (Delivery Details)</h6>
+                                            <!-- Step 3 -->
+                                            <h6>Step 3 (Delivery Details)</h6>
                                             <fieldset>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -357,6 +361,12 @@
     <script>
         $(function() {
 
+            let counter = 0;
+
+            $('.countme').on('click', function () {
+                counter++
+
+            })
             $("#delivery_note_image").on('change', function() {
                 preview_image();
             });

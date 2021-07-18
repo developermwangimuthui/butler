@@ -9,9 +9,19 @@
 
 (function (window, document, $) {
     'use strict';
-
+    let i =0;
     // Default
-    $('.repeater-default').repeater();
+    $('.repeater-default').repeater({
+        show: function () {
+            $(this).slideDown();
+            $('.select2-container').remove();
+            $('.select2').select2({
+              placeholder: "Placeholder text",
+              allowClear: true
+            });
+            $('.select2-container').css('width','100%');
+          }
+    });
 
     // Custom Show / Hide Configurations
     $('.file-repeater, .contact-repeater').repeater({
