@@ -70,7 +70,7 @@
                                                     @endif
                                                   </td>
                                                   <td>
-                                                        <a class="btn btn-info" href="#" id="showUser" title="show">Show</a>
+                                                        {{-- <a class="btn btn-info" href="#" id="showUser" title="show">Show</a> --}}
 
                                                         <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
 
@@ -168,7 +168,7 @@
         </div>
     </div>
 
-    <script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>   
+    <script src="/backend/app-assets/js/core/libraries/jquery.min.js"></script>
 
 
 

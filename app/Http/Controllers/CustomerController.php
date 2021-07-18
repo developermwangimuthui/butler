@@ -32,7 +32,7 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::with('user')->get();
 
         return view('backend.customers.index', compact('customers'));
     }
@@ -76,6 +76,8 @@ class CustomerController extends Controller
             ]);
 
             $userId = $user->id;
+
+            $user->assignRole('Customer');
 
             $customer = new Customer();
             $customer->phone = $request->input('phone');

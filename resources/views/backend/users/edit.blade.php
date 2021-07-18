@@ -82,7 +82,7 @@
 
                                                 <div class="form-actions">
                                                     <button type="button" class="btn btn-warning mr-1">
-                                                        <i class="ft-x"></i> <a href="{{ route('user.index') }}">Cancel</a>
+                                                        <i class="ft-x"></i> <a href="{{ route('users.index') }}">Cancel</a>
                                                     </button>
                                                     <button type="submit" id="submit_btn" class="btn btn-primary">
                                                         <i class="la la-check-square-o"></i> Save
