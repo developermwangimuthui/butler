@@ -157,10 +157,7 @@
                                                     <div data-repeater-list="delivery_points">
                                                         <div data-repeater-item>
                                                             <div class="card border-secondary">
-                                                                @php
-                                                                    $count=0;
-                                                                    $count++;
-                                                                @endphp
+
                                                                 <div class="card-header">
                                                                     <h4 class="card-title">Collapse Example</h4>
                                                                 </div>
@@ -175,7 +172,7 @@
 
                                                                                     <select
                                                                                         class="select2 form-control block"
-                                                                                        id="deliveryPoint{{$count}}"
+                                                                                        id="deliveryPoint"
                                                                                         name="location_id" required>
                                                                                         <option disabled selected>Choose one
                                                                                         </option>
@@ -361,12 +358,6 @@
     <script>
         $(function() {
 
-            let counter = 0;
-
-            $('.countme').on('click', function () {
-                counter++
-
-            })
             $("#delivery_note_image").on('change', function() {
                 preview_image();
             });
@@ -382,36 +373,6 @@
                 }
                 reader.readAsDataURL(event.target.files[0]);
             }
-
-            $('select').select2({
-                width: '100%'
-                //theme: "bootstrap"
-            });
-
-
-          /*   if ($('.repeater-default').length) {
-                var reportRepeater = $('.repeater-default').repeater({
-                    defaultValues: {
-                        'textarea-input': 'foo',
-                        'text-input': 'bar',
-                    },
-                    show: function() {
-                        $(this).slideDown();
-                        $('.select2-container').remove();
-                        $('select').select2({
-                            width: '100%',
-                            placeholder: "Placeholder text",
-                            allowClear: true
-                        });
-                    },
-                    hide: function(deleteElement) {
-                        if (confirm('Are you sure you want to delete this?')) {
-                            $(this).slideUp(deleteElement);
-                        }
-                    }
-
-                });
-            } */
 
         });
     </script>

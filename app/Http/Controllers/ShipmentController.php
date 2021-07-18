@@ -70,7 +70,7 @@ class ShipmentController extends Controller
 
 
 
-        $customers = Customer::all();
+        $customers = Customer::with('user')->get();
         $trucks = Truck::with('truck_type', 'truck_make')->get();
         $locations = Location::all();
 
@@ -115,7 +115,7 @@ class ShipmentController extends Controller
             $data['delivery_points'][$i]['delivery_note_image']= $thumb_file;
 
 
-            
+
 
         }
 
@@ -201,7 +201,7 @@ class ShipmentController extends Controller
 
 
         $shipment = Shipment::find($id);
-        $customers = Customer::all();
+        $customers = Customer::with('user')->get();
         $trucks =Truck::with('truck_type', 'truck_make')->get();
         $locations = Location::all();
 
@@ -231,13 +231,13 @@ class ShipmentController extends Controller
 
                 $thumb = $data['delivery_points'][$i]['delivery_note_image'];
                 $thumb_file = $this->uploadImage($thumb, $DIR_DELIVERY_NOTES_IMAGES);
-    
+
                 $data['delivery_points'][$i]['delivery_note_image']= $thumb_file;
                 $data['delivery_points'][$i]['delivery_note_image_prev']= $thumb_file;
 
             } elseif( ($data['delivery_points'][$i]['delivery_note_image_prev'] != null )) {
                 $data['delivery_points'][$i]['delivery_note_image'] = $data['delivery_points'][$i]['delivery_note_image_prev'];
-            }          
+            }
 
         }
 

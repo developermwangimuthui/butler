@@ -77,9 +77,9 @@
 
                                                             <span><i class="ft-edit-1" id="editTruck"
                                                                     data-id="{{ $truck->id }}"
-                                                                    data-truck_type="{{ $truck->type_id }}"
+                                                                    data-truck_type="{{ $truck->truck_type_id }}"
+                                                                    data-truck_make="{{ $truck->truck_make_id }}"
                                                                     data-registration=" {{ $truck->registration }}"
-                                                                    data-truck_make=" {{ $truck->truck_make_id }}"
                                                                     data-load_capacity="{{ $truck->load_capacity }}"
                                                                     data-cargo_bed_dimensions="{{ $truck->cargo_bed_dimensions }}"
                                                                     data-owners_name="{{ $truck->owners_name }}"
@@ -409,9 +409,9 @@
 
             let id = $(this).attr('data-id'),
                 registration = $(this).attr('data-registration'),
-                truck_make = $(this).attr('data-truck_make'),
                 load_capacity = $(this).attr('data-load_capacity'),
                 truck_type = $(this).attr('data-truck_type'),
+                truck_make = $(this).attr('data-truck_make'),
                 cargo_bed_dimensions = $(this).attr('data-cargo_bed_dimensions');
             owners_name = $(this).attr('data-owners_name');
             owners_phone = $(this).attr('data-owners_phone');
@@ -423,19 +423,18 @@
             $('#id').val(id);
             $('#registration').val(registration);
             $('#load_capacity').val(load_capacity);
-            $('#truck_type').val(truck_type);
             $('#cargo_bed_dimensions').val(cargo_bed_dimensions);
             $('#owners_name').val(owners_name);
             $('#owners_phone').val(owners_phone);
 
-            console.log(`${truck_make}`);
-
-            $('select[name=truck_make_id]').selected('val', truck_make);
-
-            // $('select[name=truck_make_id] option[value="`${truck_make}`"]').prop('selected', true);
 
 
-            $('.form').find('select[name=truck_make_id]')
+
+            $('select[name=truck_type_id]').val(truck_type); // Select the option with a value of '1'
+            $('select[name=truck_type_id]').trigger('change');
+            $('select[name=truck_make_id]').val(truck_make); // Select the option with a value of '1'
+            $('select[name=truck_make_id]').trigger('change');
+
 
             $('#truck_info').modal('show');
         });
